@@ -1,0 +1,17 @@
+# Build and Release Folders
+bin-debug/
+bin-release/
+
+# Other Folders
+data/
+fla/
+pics/
+psd/
+tps/
+
+# Project property files
+.actionScriptProperties
+.flexProperties
+.settings/
+.project
+.DS_Store

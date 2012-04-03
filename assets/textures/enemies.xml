@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="enemies.png">
+    <SubTexture name="enemy_gray" x="2" y="46" width="66" height="20"/>
+    <SubTexture name="enemy_green" x="2" y="24" width="66" height="20"/>
+    <SubTexture name="enemy_red" x="2" y="2" width="66" height="20"/>
+    <SubTexture name="laser_blue" x="70" y="43" width="31" height="12"/>
+    <SubTexture name="laser_green" x="70" y="16" width="33" height="11" frameX="0" frameY="-2" frameWidth="37" frameHeight="15"/>
+    <SubTexture name="laser_red" x="70" y="29" width="32" height="12" frameX="0" frameY="0" frameWidth="34" frameHeight="12"/>
+    <SubTexture name="laser_yellow" x="70" y="2" width="47" height="12" frameX="0" frameY="-2" frameWidth="47" frameHeight="16"/>
+</TextureAtlas>

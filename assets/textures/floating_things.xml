@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="floating_things.png">
+    <SubTexture name="asteriod_big" x="2" y="179" width="81" height="58"/>
+    <SubTexture name="asteriod_medium" x="185" y="59" width="47" height="30"/>
+    <SubTexture name="asteriod_small" x="185" y="91" width="25" height="16"/>
+    <SubTexture name="health" x="212" y="91" width="23" height="23"/>
+    <SubTexture name="life_force" x="185" y="2" width="57" height="55"/>
+    <SubTexture name="life_force_attached" x="2" y="2" width="181" height="175"/>
+</TextureAtlas>
