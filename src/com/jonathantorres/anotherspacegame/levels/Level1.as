@@ -2,7 +2,10 @@ package com.jonathantorres.anotherspacegame.levels
 {
 	import com.jonathantorres.anotherspacegame.Assets;
 	import com.jonathantorres.anotherspacegame.objects.Asteroid;
+	import com.jonathantorres.anotherspacegame.objects.EnemyShip;
+	import com.jonathantorres.anotherspacegame.objects.Health;
 	import com.jonathantorres.anotherspacegame.objects.Laser;
+	import com.jonathantorres.anotherspacegame.objects.Lifeforce;
 	import com.jonathantorres.anotherspacegame.objects.PlayerShip;
 	
 	import starling.core.Starling;
@@ -22,6 +25,9 @@ package com.jonathantorres.anotherspacegame.levels
 		private var _bottomRock:Image;
 		private var _bigAsteroid:Asteroid;
 		private var _playerShip:PlayerShip;
+		private var _enemyShip:EnemyShip;
+		private var _health:Health;
+		private var _lifeforce:Lifeforce;
 		
 		public function Level1()
 		{
@@ -52,6 +58,21 @@ package com.jonathantorres.anotherspacegame.levels
 			_bigAsteroid.y = 300;
 			addChild(_bigAsteroid);
 			
+			_enemyShip = new EnemyShip('red');
+			_enemyShip.x = 800;
+			_enemyShip.y = 250;
+			addChild(_enemyShip);
+			
+			_health = new Health();
+			_health.x = 300;
+			_health.y = 300;
+			addChild(_health);
+			
+			_lifeforce = new Lifeforce();
+			_lifeforce.x = 600;
+			_lifeforce.y = 230;
+			addChild(_lifeforce);
+			
 			this.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}
 		
@@ -59,13 +80,15 @@ package com.jonathantorres.anotherspacegame.levels
 		{
 			_playerShip.moveShip();
 			_bigAsteroid.animate();
+			_enemyShip.animate();
+			_health.animate();
+			_lifeforce.animate();
 			
 			var lasers:Array = _playerShip.lasers;
 			
 			for (var i:int = 0; i < lasers.length; i++) {
 				Laser(lasers[i]).animate();
 			}
-			
 		}
 		
 		protected function onAddedToStage(event:Event):void
