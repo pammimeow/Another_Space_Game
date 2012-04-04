@@ -84,10 +84,15 @@ package com.jonathantorres.anotherspacegame.levels
 			_health.animate();
 			_lifeforce.animate();
 			
-			var lasers:Array = _playerShip.lasers;
+			var playerLasers:Array = _playerShip.lasers;
+			var enemyLasers:Array = _enemyShip.lasers;
 			
-			for (var i:int = 0; i < lasers.length; i++) {
-				Laser(lasers[i]).animate();
+			for (var i:int = 0; i < playerLasers.length; i++) {
+				Laser(playerLasers[i]).animate('right');
+			}
+			
+			for (var j:int = 0; j < enemyLasers.length; j++) {
+				Laser(enemyLasers[j]).animate('left');
 			}
 		}
 		

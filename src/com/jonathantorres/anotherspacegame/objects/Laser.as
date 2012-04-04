@@ -48,12 +48,16 @@ package com.jonathantorres.anotherspacegame.objects
 			addChild(_laser);
 		}
 		
-		public function animate():void
+		public function animate(direction:String):void
 		{
 			_ax += _speed;
 			_vx += _ax;
 			
-			this.x += _vx;
+			if (direction == 'right') {
+				this.x += _vx;
+			} else if (direction == 'left') {
+				this.x -= _vx;
+			}
 		}
 		
 		protected function onAddedToStage(event:Event):void

@@ -2,6 +2,9 @@ package com.jonathantorres.anotherspacegame.objects
 {
 	import com.jonathantorres.anotherspacegame.Assets;
 	
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
+	
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -17,6 +20,9 @@ package com.jonathantorres.anotherspacegame.objects
 		private var _speed:Number = 0.01;
 		
 		private var _ship:Image;
+		private var _shootTimer:Timer;
+		
+		public var lasers:Array = new Array();
 		
 		public function EnemyShip(color:String)
 		{
@@ -42,9 +48,18 @@ package com.jonathantorres.anotherspacegame.objects
 					break;
 			}
 			
-			_ship.x = -_ship.width;
-			_ship.y = -_ship.height * 0.5;
+			_ship.x = 0;
+			_ship.y = -(_ship.height * 0.5);
 			addChild(_ship);
+			
+			_shootTimer = new Timer(2000);
+			_shootTimer.addEventListener(TimerEvent.TIMER, onShootTimer);
+			_shootTimer.start();
+		}
+		
+		protected function onShootTimer(event:TimerEvent):void
+		{
+			shoot();
 		}
 		
 		public function animate():void
@@ -56,9 +71,19 @@ package com.jonathantorres.anotherspacegame.objects
 			this.y += _vy;
 		}
 		
-		protected function shoot():void
+		public function shoot():void
 		{
+			var shipColor:String = _color;
 			
+			if (shipColor == 'gray') {
+				shipColor = 'blue';
+			}
+			
+			var laser:Laser = new Laser(shipColor);
+			laser.x = this.x - 10;
+			laser.y = this.y - 5;
+			Sprite(this.parent).addChild(laser);
+			lasers.push(laser);
 		}
 		
 		protected function onAddedToStage(event:Event):void
