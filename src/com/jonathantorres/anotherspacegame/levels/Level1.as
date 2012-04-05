@@ -7,8 +7,13 @@ package com.jonathantorres.anotherspacegame.levels
 	import com.jonathantorres.anotherspacegame.objects.Laser;
 	import com.jonathantorres.anotherspacegame.objects.Lifeforce;
 	import com.jonathantorres.anotherspacegame.objects.PlayerShip;
+	import com.jonathantorres.anotherspacegame.ui.LevelNumber;
+	import com.jonathantorres.anotherspacegame.ui.Lifebar;
+	import com.jonathantorres.anotherspacegame.ui.Score;
+	import com.jonathantorres.anotherspacegame.ui.Time;
 	
 	import starling.core.Starling;
+	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -28,6 +33,10 @@ package com.jonathantorres.anotherspacegame.levels
 		private var _enemyShip:EnemyShip;
 		private var _health:Health;
 		private var _lifeforce:Lifeforce;
+		private var _life:Lifebar;
+		private var _score:Score;
+		private var _time:Time;
+		private var _levelNum:LevelNumber;
 		
 		public function Level1()
 		{
@@ -41,13 +50,13 @@ package com.jonathantorres.anotherspacegame.levels
 		{
 			_topRock = new Image(Assets.getTexture('Rocks'));
 			_topRock.x = stage.stageWidth;
-			_topRock.y = _topRock.height;
+			_topRock.y = _topRock.height - 5;
 			_topRock.rotation = deg2rad(180);
 			addChild(_topRock);
 			
 			_bottomRock = new Image(Assets.getTexture('Rocks'));
 			_bottomRock.x = 0;
-			_bottomRock.y = (stage.stageHeight) - _bottomRock.height;
+			_bottomRock.y = (stage.stageHeight) - (_bottomRock.height - 5);
 			addChild(_bottomRock);
 			
 			_playerShip = new PlayerShip();
@@ -72,6 +81,26 @@ package com.jonathantorres.anotherspacegame.levels
 			_lifeforce.x = 600;
 			_lifeforce.y = 230;
 			addChild(_lifeforce);
+			
+			_life = new Lifebar();
+			_life.x = 180;
+			_life.y = stage.stageHeight - 25;
+			addChild(_life);
+			
+			_score = new Score();
+			_score.x = _life.x + 270;
+			_score.y = stage.stageHeight - 25;
+			addChild(_score);
+			
+			_time = new Time();
+			_time.x = _score.x + 160;
+			_time.y = stage.stageHeight - 25;;
+			addChild(_time);
+			
+			_levelNum = new LevelNumber();
+			_levelNum.x = _time.x + 100;
+			_levelNum.y = stage.stageHeight - 25;
+			addChild(_levelNum);
 			
 			this.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}
