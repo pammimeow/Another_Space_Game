@@ -68,6 +68,12 @@ package com.jonathantorres.anotherspacegame.objects
 			
 			this.x += _vx;
 			this.y += _vy;
+			
+			if (this.x <= 0) {
+				this.x = stage.stageWidth + _ship.width;
+			} else if ((this.x - _ship.width) >= stage.stageWidth) {
+				this.x = 0;
+			}
 		}
 		
 		public function shoot():void
@@ -144,5 +150,16 @@ package com.jonathantorres.anotherspacegame.objects
 		{
 			init();
 		}
+
+		public function get ship():Image
+		{
+			return _ship;
+		}
+
+		public function set ship(value:Image):void
+		{
+			_ship = value;
+		}
+
 	}
 }

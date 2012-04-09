@@ -86,7 +86,7 @@ package com.jonathantorres.anotherspacegame
 		public function Assets() { }
 		
 		public static function getTexture(name:String):Texture
-		{
+		{	
 			if (_textureAssets[name] == undefined) {
 				_textureAssets[name] = Texture.fromBitmap(Bitmap(new Assets[name]()));
 			}
