@@ -5,6 +5,7 @@ package com.jonathantorres.anotherspacegame
 	import flash.display.StageScaleMode;
 	
 	import starling.core.Starling;
+	import com.jonathantorres.anotherspacegame.utils.Stats;
 	
 	/**
 	 * @author Jonathan Torres
@@ -18,6 +19,9 @@ package com.jonathantorres.anotherspacegame
 		{
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
+			
+			/* To measure performance */
+			addChild(new Stats());
 			
 			_starling = new Starling(Game, stage);
 			_starling.start();
