@@ -30,6 +30,7 @@ package com.jonathantorres.anotherspacegame.objects
 			
 			_color = color;
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			this.addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
 		}
 		
 		protected function init():void
@@ -89,6 +90,13 @@ package com.jonathantorres.anotherspacegame.objects
 		protected function onAddedToStage(event:Event):void
 		{
 			init();
+		}
+		
+		protected function onRemovedFromStage(event:Event):void
+		{
+			_shootTimer.stop();
+			_shootTimer.removeEventListener(TimerEvent.TIMER, onShootTimer);
+			_shootTimer = null;
 		}
 	}
 }

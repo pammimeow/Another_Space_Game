@@ -3,12 +3,9 @@ package com.jonathantorres.anotherspacegame
 	import com.jonathantorres.anotherspacegame.levels.Level1;
 	import com.jonathantorres.anotherspacegame.menu.MainMenu;
 	
-	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import starling.events.Touch;
-	import starling.events.TouchEvent;
 	import starling.extensions.ParticleDesignerPS;
 	import starling.text.TextField;
 	
