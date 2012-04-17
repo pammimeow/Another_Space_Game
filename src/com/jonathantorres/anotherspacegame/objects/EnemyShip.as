@@ -94,6 +94,13 @@ package com.jonathantorres.anotherspacegame.objects
 		
 		protected function onRemovedFromStage(event:Event):void
 		{
+			if (lasers.length != 0) {
+				for (var i:int = 0; i < lasers.length; i++) {
+					Sprite(this.parent).removeChild(lasers[i]);
+					lasers.splice(i, 1);
+				}
+			}
+			
 			_shootTimer.stop();
 			_shootTimer.removeEventListener(TimerEvent.TIMER, onShootTimer);
 			_shootTimer = null;
