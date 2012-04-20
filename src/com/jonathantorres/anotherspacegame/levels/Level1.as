@@ -27,19 +27,32 @@ package com.jonathantorres.anotherspacegame.levels
 	public class Level1 extends Sprite
 	{
 		private var _topRock:Image;
+		private var _topRockRect:Rectangle;
 		private var _bottomRock:Image;
-		private var _bigAsteroid:Asteroid;
+		private var _bottomRockRect:Rectangle;
+		
 		private var _playerShip:PlayerShip;
-		private var _enemyShip:EnemyShip;
-		private var _health:Health;
-		private var _lifeforce:Lifeforce;
+		private var _playerShipRect:Rectangle;
+		private var _playerLasers:Array;
+		
+		private var _enemyShips:Array;
+		private var _enemyDeployment:Timer;
+		private var _typesOfEnemies:Array;
+		
+		private var _asteroids:Array;
+		private var _asteroidDeployment:Timer;
+		private var _typesOfAsteroids:Array;
+		
+		private var _healthbars:Array;
+		private var _healthbarsDeployment:Timer;
+		
+		private var _lifeforces:Array;
+		private var _lifeforceDeployment:Timer;
+		
 		private var _life:Lifebar;
 		private var _score:Score;
 		private var _time:Time;
 		private var _levelNum:LevelNumber;
-		private var _enemyShips:Array;
-		private var _enemyDeployment:Timer;
-		private var _typesOfEnemies:Array;
 		
 		public function Level1()
 		{
@@ -65,21 +78,6 @@ package com.jonathantorres.anotherspacegame.levels
 			_playerShip = new PlayerShip();
 			addChild(_playerShip);
 			
-			/*_bigAsteroid = new Asteroid('small');
-			_bigAsteroid.x = 800;
-			_bigAsteroid.y = 300;
-			addChild(_bigAsteroid);
-			
-			_health = new Health();
-			_health.x = 300;
-			_health.y = 300;
-			addChild(_health);
-			
-			_lifeforce = new Lifeforce();
-			_lifeforce.x = 600;
-			_lifeforce.y = 230;
-			addChild(_lifeforce);*/
-			
 			_life = new Lifebar();
 			_life.x = 180;
 			_life.y = stage.stageHeight - 25;
@@ -102,47 +100,86 @@ package com.jonathantorres.anotherspacegame.levels
 			
 			_enemyShips = new Array();
 			_typesOfEnemies = new Array('gray', 'red', 'green');
-			_enemyDeployment = new Timer(Math.random() * 2000 + 1000);
+			_enemyDeployment = new Timer(2000, 50);
 			_enemyDeployment.addEventListener(TimerEvent.TIMER, onEnemyDeploymentTimer);
 			_enemyDeployment.start();
+			
+			_healthbars = new Array();
+			_healthbarsDeployment = new Timer(10000, 10);
+			_healthbarsDeployment.addEventListener(TimerEvent.TIMER, onHealthbarDeploymentTimer);
+			_healthbarsDeployment.start();
+			
+			_asteroids = new Array();
+			_typesOfAsteroids = new Array('small', 'medium', 'large');
+			_asteroidDeployment = new Timer(4000, 20);
+			_asteroidDeployment.addEventListener(TimerEvent.TIMER, onAsteroidDeploymentTimer);
+			_asteroidDeployment.start();
+			
+			_lifeforces = new Array();
+			_lifeforceDeployment = new Timer(12000, 5);
+			_lifeforceDeployment.addEventListener(TimerEvent.TIMER, onLifeforceDeploymentTimer);
+			_lifeforceDeployment.start();
 			
 			this.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}
 		
 		protected function onEnterFrame(event:Event):void
 		{
-			var playerLasers:Array = _playerShip.lasers;
-			var playerShipRect:Rectangle = _playerShip.ship.getBounds(this.parent);
-			var topRockRect:Rectangle = _topRock.getBounds(this.parent);
-			var bottomRockRect:Rectangle = _bottomRock.getBounds(this.parent);
-			//var bigAsteroidRect:Rectangle = _bigAsteroid.getBounds(this.parent);
-			//var healthRect:Rectangle = _health.getBounds(this.parent);
-			//var lifeForceRect:Rectangle = _lifeforce.getBounds(this.parent);
+			_playerLasers = _playerShip.lasers;
+			_playerShipRect = _playerShip.ship.getBounds(this.parent);
+			_topRockRect = _topRock.getBounds(this.parent);
+			_bottomRockRect = _bottomRock.getBounds(this.parent);
 			
 			_playerShip.moveShip();
-			//_bigAsteroid.animate();
-			//_health.animate();
-			//_lifeforce.animate();
+			
+			/*
+			* Collision : Ship with the top and the bottom rocks
+			*/
+			if ((_playerShipRect.intersects(_topRockRect)) || (_playerShipRect.intersects(_bottomRockRect))) {
+				//trace('Ship hits top or bottom rocks');
+			}
 			
 			/*
 			 * Animation and Collisions : Player ship and his lasers
 			 */
-			if (playerLasers.length != 0) {
-				for (var k:int = 0; k < playerLasers.length; k++) {
-					var playerLaser:Laser = Laser(playerLasers[k]);
-					var playerLaserRect:Rectangle = playerLaser.getBounds(this.parent);
+			for (var k:int = 0; k < _playerLasers.length; k++) {
+				var playerLaser:Laser = Laser(_playerLasers[k]);
+				var playerLaserRect:Rectangle = playerLaser.getBounds(this.parent);
+				
+				playerLaser.animate('right');
+				
+				for (var l:int = 0; l < _enemyShips.length; l++) {
+					var enemyShip:EnemyShip = _enemyShips[l];
 					
-					playerLaser.animate('right');
-					
-					for (var l:int = 0; l < _enemyShips.length; l++) {
-						var enemyShip:EnemyShip = _enemyShips[l];
+					if (this.contains(enemyShip)) {
+						var enemyShipRect:Rectangle = enemyShip.getBounds(this.parent);
 						
-						if (this.contains(enemyShip)) {
-							var enemyShipRect:Rectangle = enemyShip.getBounds(this.parent);
+						if (playerLaserRect.intersects(enemyShipRect)) {
+							//trace('Player hits an enemy');
+							removeChild(enemyShip);
+							_enemyShips.splice(l, 1);
 							
-							if (playerLaserRect.intersects(enemyShipRect)) {
-								trace('Player hits an enemy');
-							}
+							removeChild(playerLaser);
+							_playerShip.lasers.splice(k, 1);
+							continue;
+						}
+					}
+				}
+				
+				for (var o:int = 0; o < _asteroids.length; o++) {
+					var asteroid:Asteroid = _asteroids[o];
+					
+					if (this.contains(asteroid)) {
+						var asteroidRect:Rectangle = asteroid.getBounds(this.parent);
+						
+						if (playerLaserRect.intersects(asteroidRect)) {
+							//trace('Player hits an asteroid');
+							removeChild(asteroid);
+							_asteroids.splice(o, 1);
+							
+							removeChild(playerLaser);
+							_playerShip.lasers.splice(k, 1);
+							continue;
 						}
 					}
 				}
@@ -151,99 +188,156 @@ package com.jonathantorres.anotherspacegame.levels
 			/*
 			 * Animation and Collisions : Enemy Ships and their lasers
 			 */
-			if (_enemyShips.length != 0) {
-				for (var i:int = 0; i < _enemyShips.length; i++) {
-					var enemy:EnemyShip = _enemyShips[i];
-					var enemyLasers:Array = enemy.lasers;
-					enemy.animate();
+			for (var i:int = 0; i < _enemyShips.length; i++) {
+				var enemy:EnemyShip = _enemyShips[i];
+				var enemyLasers:Array = enemy.lasers;
+				enemy.animate();
+				
+				if (enemy.x <= 0 - enemy.width) {
+					removeChild(enemy);
+					_enemyShips.splice(i, 1);
+					continue;
+					//trace('Enemies: ' + _enemyShips.length);
+				}
+				
+				if (this.contains(enemy)) {
+					var enemyRect:Rectangle = enemy.getBounds(this.parent);
 					
-					if (enemy.x <= 0 - enemy.width) {
+					if (_playerShipRect.intersects(enemyRect)) {
 						removeChild(enemy);
+						_enemyShips.splice(i, 1);
+						continue;
+						//trace('Player ship hits enemy ship');
 					}
 					
-					if (this.contains(enemy)) {
-						var enemyRect:Rectangle = enemy.getBounds(this.parent);
+					if ((enemyRect.intersects(_topRockRect)) || (enemyRect.intersects(_bottomRockRect))) {
+						removeChild(enemy);
+						_enemyShips.splice(i, 1);
+						continue;
+						//trace('Enemy hits top or bottom rocks');
+					}
+				}
+				
+				for (var j:int = 0; j < enemyLasers.length; j++) {
+					var laser:Laser = enemyLasers[j];
+					laser.animate('left');
+					
+					if (laser.x <= 0) {
+						removeChild(laser);
+						enemyLasers.splice(j, 1);
+						continue;
+						//trace('Enemies: ' + _enemyShips.length);
+					}
+					
+					if (this.contains(laser)) {
+						var laserRect:Rectangle = laser.getBounds(this.parent);
 						
-						if (playerShipRect.intersects(enemyRect)) {
-							trace('Player ship hits enemy ship');
-						}
-					}
-					
-					if (enemyLasers.length != 0) {
-						for (var j:int = 0; j < enemyLasers.length; j++) {
-							var laser:Laser = enemyLasers[j];
-							laser.animate('left');
-							
-							if (laser.x <= 0) {
-								removeChild(laser);
-							}
-							
-							if (this.contains(laser)) {
-								var laserRect:Rectangle = laser.getBounds(this.parent);
-								
-								if (playerShipRect.intersects(laserRect)) {
-									trace('enemy shot player');
-								}
-							}
+						if (_playerShipRect.intersects(laserRect)) {
+							//trace('enemy shot player');
+							removeChild(laser);
+							enemyLasers.splice(j, 1);
+							continue;
 						}
 					}
 				}
 			}
 			
 			/*
-			 * Collisions
-			 */
-			if ((playerShipRect.intersects(topRockRect)) || (playerShipRect.intersects(bottomRockRect))) {
-				trace('Ship hits top or bottom rocks');
-			}
-			
-			/*if (playerShipRect.intersects(bigAsteroidRect)) {
-				trace('Ship hits asteroid');
-			}
-			
-			if (playerShipRect.intersects(enemyShipRect)) {
-				trace('Ship hits enemy ship');
-			}
-			
-			for (var i:int = 0; i < enemyLasers.length; i++) {
-				var enemyLaser:Laser = Laser(enemyLasers[i]);
-				var enemyLaserRect:Rectangle = enemyLaser.getBounds(this.parent);
+			* Animation and Collisions : Asteroids
+			*/
+			for (var n:int = 0; n < _asteroids.length; n++) {
+				var theAsteroid:Asteroid = _asteroids[n];
+				theAsteroid.animate();
 				
-				enemyLaser.animate('left');
-				
-				if (playerShipRect.intersects(enemyLaserRect)) {
-					trace('Player got hit by an enemy laser');
+				if (this.contains(theAsteroid)) {
+					var theAsteroidRect:Rectangle = theAsteroid.getBounds(this.parent);
+					
+					if (_playerShipRect.intersects(theAsteroidRect)) {
+						//trace('player ship hits asteroid');
+						removeChild(theAsteroid);
+						_asteroids.splice(n, 1);
+						continue;
+					}
 				}
 			}
 			
-			for (var j:int = 0; j < playerLasers.length; j++) {
-				var playerLaser:Laser = Laser(playerLasers[j]);
-				var playerLaserRect:Rectangle = playerLaser.getBounds(this.parent);
+			/*
+			* Animation and Collisions : Healthbars
+			*/
+			for (var m:int = 0; m < _healthbars.length; m++) {
+				var healthbar:Health = _healthbars[m];
+				healthbar.animate();
 				
-				playerLaser.animate('right');
-				
-				if (enemyShipRect.intersects(playerLaserRect)) {
-					trace('Player hits an enemy');
+				if (this.contains(healthbar)) {
+					var healthbarRect:Rectangle = healthbar.getBounds(this.parent);
+					
+					if (_playerShipRect.intersects(healthbarRect)) {
+						//trace('player takes health bar');
+						removeChild(healthbar);
+						_healthbars.splice(m, 1);
+						continue;
+					}
 				}
 			}
 			
-			if (playerShipRect.intersects(healthRect)) {
-				trace('Player took a life bar');
+			/*
+			* Animation and Collisions : Lifeforces
+			*/
+			for (var p:int = 0; p < _lifeforces.length; p++) {
+				var lifeforce:Lifeforce = _lifeforces[p];
+				lifeforce.animate();
+				
+				if (this.contains(lifeforce)) {
+					var lifeforceRect:Rectangle = lifeforce.getBounds(this.parent);
+					
+					if (_playerShipRect.intersects(lifeforceRect)) {
+						trace('player protects ship');
+						removeChild(lifeforce);
+						_lifeforces.splice(m, 1);
+						continue;
+					}
+				}
 			}
+		}
+		
+		protected function onLifeforceDeploymentTimer(event:TimerEvent):void
+		{
+			var lifeforce:Lifeforce = new Lifeforce();
+			lifeforce.x = stage.stageWidth + (lifeforce.width) + 20;
+			lifeforce.y = (Math.random() * (350 - (_topRock.height + 50))) + _topRock.height;
+			addChild(lifeforce);
 			
-			if (playerShipRect.intersects(lifeForceRect)) {
-				trace('Player took a life force');
-			}*/
+			_lifeforces.push(lifeforce);
+		}
+		
+		protected function onAsteroidDeploymentTimer(event:TimerEvent):void
+		{
+			var asteroid:Asteroid = new Asteroid(_typesOfAsteroids[Math.floor(Math.random() * 3)]);
+			asteroid.x = stage.stageWidth + (asteroid.width) + 50;
+			asteroid.y = (Math.random() * (350 - (_topRock.height + 50))) + _topRock.height;
+			addChild(asteroid);
+			
+			_asteroids.push(asteroid);
 		}
 		
 		protected function onEnemyDeploymentTimer(event:TimerEvent):void
 		{
 			var enemyShip:EnemyShip = new EnemyShip(_typesOfEnemies[Math.floor(Math.random() * 3)]);
 			enemyShip.x = stage.stageWidth + enemyShip.width;
-			enemyShip.y = (Math.random() * _bottomRock.y) + _topRock.height;
+			enemyShip.y = (Math.random() * (350 - (_topRock.height + 50))) + _topRock.height;
 			addChild(enemyShip);
 			
 			_enemyShips.push(enemyShip);
+		}
+		
+		protected function onHealthbarDeploymentTimer(event:TimerEvent):void
+		{
+			var healthbar:Health = new Health();
+			healthbar.x = stage.stageWidth + healthbar.width;
+			healthbar.y = (Math.random() * (350 - (_topRock.height + 50))) + _topRock.height;
+			addChild(healthbar);
+			
+			_healthbars.push(healthbar);
 		}
 		
 		protected function onAddedToStage(event:Event):void
