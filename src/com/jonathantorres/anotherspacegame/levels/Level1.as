@@ -55,8 +55,9 @@ package com.jonathantorres.anotherspacegame.levels
 		private var _levelNum:LevelNumber;
 		
 		private var _shipIsProtected:Boolean;
-
 		private var _protectingLifeforce:Lifeforce;
+		
+		private var _gameScore:Number;
 		
 		public function Level1()
 		{
@@ -125,6 +126,7 @@ package com.jonathantorres.anotherspacegame.levels
 			_lifeforceDeployment.start();
 			
 			_shipIsProtected = false;
+			_gameScore = 0;
 			
 			this.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}
@@ -163,11 +165,15 @@ package com.jonathantorres.anotherspacegame.levels
 						
 						if (playerLaserRect.intersects(enemyShipRect)) {
 							//trace('Player hits an enemy');
+							_gameScore += enemyShip.scoreValue;
+							_score.updateScore(_gameScore);
+							
 							removeChild(enemyShip);
 							_enemyShips.splice(l, 1);
 							
 							removeChild(playerLaser);
 							_playerShip.lasers.splice(k, 1);
+							
 							continue;
 						}
 					}
@@ -181,6 +187,9 @@ package com.jonathantorres.anotherspacegame.levels
 						
 						if (playerLaserRect.intersects(asteroidRect)) {
 							//trace('Player hits an asteroid');
+							_gameScore += asteroid.scoreValue;
+							_score.updateScore(_gameScore);
+							
 							removeChild(asteroid);
 							_asteroids.splice(o, 1);
 							

@@ -5,8 +5,9 @@ package com.jonathantorres.anotherspacegame.ui
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import starling.textures.Texture;
 	import starling.text.TextField;
+	import starling.textures.Texture;
+	import starling.utils.HAlign;
 	
 	/**
 	 * @author Jonathan Torres
@@ -20,11 +21,23 @@ package com.jonathantorres.anotherspacegame.ui
 		private var _scoreTitle:TextField;
 		private var _gameScore:TextField;
 		
+		private var _score:Number;
+		
 		public function Score()
 		{
 			super();
 			
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+		}
+		
+		public function updateScore(score:Number):void
+		{
+			_gameScore.text = '' + score;
+		}
+		
+		public function sumScore(score:Number):void
+		{
+			_score += score;
 		}
 		
 		protected function init():void
@@ -40,8 +53,9 @@ package com.jonathantorres.anotherspacegame.ui
 			_scoreTitle.x = 8;
 			addChild(_scoreTitle);
 			
-			_gameScore = new TextField(80, 28, '100,000,000', 'Arial', 11, 0xe34900);
-			_gameScore.x = 55;
+			_gameScore = new TextField(80, 28, '0', 'Arial', 11, 0xe34900);
+			_gameScore.hAlign = HAlign.LEFT;
+			_gameScore.x = 58;
 			addChild(_gameScore);
 		}
 		
@@ -49,5 +63,16 @@ package com.jonathantorres.anotherspacegame.ui
 		{
 			init();
 		}
+
+		public function get score():Number
+		{
+			return _score;
+		}
+
+		public function set score(value:Number):void
+		{
+			_score = value;
+		}
+
 	}
 }

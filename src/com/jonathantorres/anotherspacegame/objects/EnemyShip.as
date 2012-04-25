@@ -23,6 +23,7 @@ package com.jonathantorres.anotherspacegame.objects
 		private var _shootTimer:Timer;
 		
 		public var lasers:Array = new Array();
+		public var scoreValue:uint = 50;
 		
 		public function EnemyShip(color:String)
 		{

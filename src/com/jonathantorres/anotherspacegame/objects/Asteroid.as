@@ -18,6 +18,8 @@ package com.jonathantorres.anotherspacegame.objects
 		private var _speed:Number = 0.01;
 		private var _rotationSpeed:Number = 0.01;
 		
+		public var scoreValue:uint = 30;
+		
 		public function Asteroid(size:String)
 		{
 			super();
