@@ -63,7 +63,5 @@ package com.jonathantorres.anotherspacegame
 		{
 			_mainTitle = value;
 		}
-
-		
 	}
 }

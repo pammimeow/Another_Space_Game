@@ -54,6 +54,10 @@ package com.jonathantorres.anotherspacegame.levels
 		private var _time:Time;
 		private var _levelNum:LevelNumber;
 		
+		private var _shipIsProtected:Boolean;
+
+		private var _protectingLifeforce:Lifeforce;
+		
 		public function Level1()
 		{
 			super();
@@ -120,6 +124,8 @@ package com.jonathantorres.anotherspacegame.levels
 			_lifeforceDeployment.addEventListener(TimerEvent.TIMER, onLifeforceDeploymentTimer);
 			_lifeforceDeployment.start();
 			
+			_shipIsProtected = false;
+			
 			this.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}
 		
@@ -131,6 +137,7 @@ package com.jonathantorres.anotherspacegame.levels
 			_bottomRockRect = _bottomRock.getBounds(this.parent);
 			
 			_playerShip.moveShip();
+			updateLifeforcePosition();
 			
 			/*
 			* Collision : Ship with the top and the bottom rocks
@@ -204,6 +211,8 @@ package com.jonathantorres.anotherspacegame.levels
 					var enemyRect:Rectangle = enemy.getBounds(this.parent);
 					
 					if (_playerShipRect.intersects(enemyRect)) {
+						removeProtectingLifeforce();
+						
 						removeChild(enemy);
 						_enemyShips.splice(i, 1);
 						continue;
@@ -234,6 +243,8 @@ package com.jonathantorres.anotherspacegame.levels
 						
 						if (_playerShipRect.intersects(laserRect)) {
 							//trace('enemy shot player');
+							removeProtectingLifeforce();
+							
 							removeChild(laser);
 							enemyLasers.splice(j, 1);
 							continue;
@@ -254,6 +265,8 @@ package com.jonathantorres.anotherspacegame.levels
 					
 					if (_playerShipRect.intersects(theAsteroidRect)) {
 						//trace('player ship hits asteroid');
+						removeProtectingLifeforce();
+						
 						removeChild(theAsteroid);
 						_asteroids.splice(n, 1);
 						continue;
@@ -291,12 +304,44 @@ package com.jonathantorres.anotherspacegame.levels
 					var lifeforceRect:Rectangle = lifeforce.getBounds(this.parent);
 					
 					if (_playerShipRect.intersects(lifeforceRect)) {
-						trace('player protects ship');
+						//trace('player protects ship');
+						addProtectingLifeforce();
+						
 						removeChild(lifeforce);
-						_lifeforces.splice(m, 1);
+						_lifeforces.splice(p, 1);
 						continue;
 					}
 				}
+			}
+			
+		}
+		
+		protected function updateLifeforcePosition():void
+		{
+			if (_shipIsProtected && (_protectingLifeforce != null)) {
+				_protectingLifeforce.x = _playerShip.x - 250;
+				_protectingLifeforce.y = _playerShip.y - 150;
+			}
+		}
+		
+		protected function addProtectingLifeforce():void
+		{
+			if (!_shipIsProtected) {
+				_protectingLifeforce = new Lifeforce();
+				_protectingLifeforce.scaleX = _protectingLifeforce.scaleY = 3.0;
+				_protectingLifeforce.x = _playerShip.x - 250;
+				_protectingLifeforce.y = _playerShip.y - 150;
+				addChild(_protectingLifeforce);
+				
+				_shipIsProtected = true;
+			}
+		}
+		
+		protected function removeProtectingLifeforce():void
+		{
+			if (_shipIsProtected && (_protectingLifeforce != null)) {
+				removeChild(_protectingLifeforce);
+				_shipIsProtected = false;
 			}
 		}
 		

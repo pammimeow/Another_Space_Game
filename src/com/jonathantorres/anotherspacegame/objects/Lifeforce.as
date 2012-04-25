@@ -5,6 +5,7 @@ package com.jonathantorres.anotherspacegame.objects
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.textures.TextureSmoothing;
 	
 	/**
 	 * @author Jonathan Torres
@@ -27,6 +28,7 @@ package com.jonathantorres.anotherspacegame.objects
 		protected function init():void
 		{
 			_lifeforce = new Image(Assets.getTexture('LifeforceSmall'));
+			_lifeforce.smoothing = TextureSmoothing.BILINEAR;
 			_lifeforce.x = _lifeforce.width * 0.5;
 			_lifeforce.y = _lifeforce.height * 0.5;
 			addChild(_lifeforce);
