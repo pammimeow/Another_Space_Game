@@ -16,6 +16,7 @@ package com.jonathantorres.anotherspacegame.objects
 		private var _speed:Number = 0.01;
 		
 		private var _health:Image;
+		public var lifeIncrease:Number = 40;
 		
 		public function Health()
 		{

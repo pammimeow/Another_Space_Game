@@ -19,6 +19,7 @@ package com.jonathantorres.anotherspacegame.objects
 		private var _rotationSpeed:Number = 0.01;
 		
 		public var scoreValue:uint = 30;
+		public var damage:uint;
 		
 		public function Asteroid(size:String)
 		{
@@ -33,14 +34,17 @@ package com.jonathantorres.anotherspacegame.objects
 			switch(_size) {
 				case 'small':
 					_asteroid = new Image(Assets.getTexture('AsteroidSmall'));
+					damage = 5;
 					break;
 				
 				case 'medium':
 					_asteroid = new Image(Assets.getTexture('AsteroidMedium'));
+					damage = 10;
 					break;
 				
 				case 'large':
 					_asteroid = new Image(Assets.getTexture('AsteroidBig'));
+					damage = 15;
 					break;
 			}
 			

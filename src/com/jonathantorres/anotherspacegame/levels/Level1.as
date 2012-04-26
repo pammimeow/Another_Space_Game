@@ -140,6 +140,7 @@ package com.jonathantorres.anotherspacegame.levels
 			
 			_playerShip.moveShip();
 			updateLifeforcePosition();
+			checkPlayerLife();
 			
 			/*
 			* Collision : Ship with the top and the bottom rocks
@@ -217,6 +218,7 @@ package com.jonathantorres.anotherspacegame.levels
 					var enemyRect:Rectangle = enemy.getBounds(this.parent);
 					
 					if (_playerShipRect.intersects(enemyRect)) {
+						if (!_shipIsProtected) _life.decreaseLife(enemy.damage);
 						removeProtectingLifeforce();
 						
 						removeChild(enemy);
@@ -249,6 +251,7 @@ package com.jonathantorres.anotherspacegame.levels
 						
 						if (_playerShipRect.intersects(laserRect)) {
 							//trace('enemy shot player');
+							if (!_shipIsProtected) _life.decreaseLife(enemy.damage);
 							removeProtectingLifeforce();
 							
 							removeChild(laser);
@@ -271,6 +274,7 @@ package com.jonathantorres.anotherspacegame.levels
 					
 					if (_playerShipRect.intersects(theAsteroidRect)) {
 						//trace('player ship hits asteroid');
+						if (!_shipIsProtected) _life.decreaseLife(theAsteroid.damage);
 						removeProtectingLifeforce();
 						
 						removeChild(theAsteroid);
@@ -292,6 +296,8 @@ package com.jonathantorres.anotherspacegame.levels
 					
 					if (_playerShipRect.intersects(healthbarRect)) {
 						//trace('player takes health bar');
+						_life.increaseLife(healthbar.lifeIncrease);
+						
 						removeChild(healthbar);
 						_healthbars.splice(m, 1);
 						continue;
@@ -322,6 +328,23 @@ package com.jonathantorres.anotherspacegame.levels
 			
 		}
 		
+		/*
+		 * Check when life reaches zero. End the game. 
+		 */
+		protected function checkPlayerLife():void
+		{
+			var totalLife:Number = _life.totalLife;
+			
+			if (totalLife <= 0) {
+				trace('Game Over!');
+			} else {
+				trace('Player Life: ' + totalLife);
+			}
+		}
+		
+		/*
+		 * If the player ship has a lifeforce, it must be kept inside the player ship
+		 */
 		protected function updateLifeforcePosition():void
 		{
 			if (_shipIsProtected && (_protectingLifeforce != null)) {
@@ -330,6 +353,9 @@ package com.jonathantorres.anotherspacegame.levels
 			}
 		}
 		
+		/*
+		 * Add lifeforce to player ship
+		 */
 		protected function addProtectingLifeforce():void
 		{
 			if (!_shipIsProtected) {
@@ -343,6 +369,9 @@ package com.jonathantorres.anotherspacegame.levels
 			}
 		}
 		
+		/*
+		 * If player ship is protected, remove it when hit.
+		 */
 		protected function removeProtectingLifeforce():void
 		{
 			if (_shipIsProtected && (_protectingLifeforce != null)) {
@@ -351,6 +380,9 @@ package com.jonathantorres.anotherspacegame.levels
 			}
 		}
 		
+		/*
+		 * Deploy a lifeforce
+		*/
 		protected function onLifeforceDeploymentTimer(event:TimerEvent):void
 		{
 			var lifeforce:Lifeforce = new Lifeforce();
@@ -361,6 +393,9 @@ package com.jonathantorres.anotherspacegame.levels
 			_lifeforces.push(lifeforce);
 		}
 		
+		/*
+		* Deploy an Asteroid
+		*/
 		protected function onAsteroidDeploymentTimer(event:TimerEvent):void
 		{
 			var asteroid:Asteroid = new Asteroid(_typesOfAsteroids[Math.floor(Math.random() * 3)]);
@@ -371,6 +406,9 @@ package com.jonathantorres.anotherspacegame.levels
 			_asteroids.push(asteroid);
 		}
 		
+		/*
+		* Deploy an enemy ship
+		*/
 		protected function onEnemyDeploymentTimer(event:TimerEvent):void
 		{
 			var enemyShip:EnemyShip = new EnemyShip(_typesOfEnemies[Math.floor(Math.random() * 3)]);
@@ -381,6 +419,9 @@ package com.jonathantorres.anotherspacegame.levels
 			_enemyShips.push(enemyShip);
 		}
 		
+		/*
+		* Deploy a healthbar
+		*/
 		protected function onHealthbarDeploymentTimer(event:TimerEvent):void
 		{
 			var healthbar:Health = new Health();

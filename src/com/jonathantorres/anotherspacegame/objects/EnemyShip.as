@@ -24,6 +24,7 @@ package com.jonathantorres.anotherspacegame.objects
 		
 		public var lasers:Array = new Array();
 		public var scoreValue:uint = 50;
+		public var damage:uint = 15;
 		
 		public function EnemyShip(color:String)
 		{

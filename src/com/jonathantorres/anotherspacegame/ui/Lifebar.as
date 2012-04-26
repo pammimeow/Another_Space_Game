@@ -24,11 +24,41 @@ package com.jonathantorres.anotherspacegame.ui
 
 		private var _lifeText:TextField;
 		
+		private var _totalLife:Number = 200;
+		
 		public function Lifebar()
 		{
 			super();
-			
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+		}
+		
+		public function increaseLife(amount:Number):void
+		{
+			_totalLife += amount;
+			
+			if (_totalLife < 200) {
+				updateLifebar();
+			} else if (_totalLife >= 200) {
+				_totalLife = 200;
+				updateLifebar();
+			}
+		}
+		
+		public function decreaseLife(amount:Number):void
+		{
+			_totalLife -= amount;
+			
+			if (_totalLife <= 0) {
+				_totalLife = 0;
+				updateLifebar();
+			} else {
+				updateLifebar();
+			}
+		}
+		
+		protected function updateLifebar():void
+		{
+			_lifeDisplay.width = _totalLife;
 		}
 		
 		protected function init():void
@@ -42,10 +72,10 @@ package com.jonathantorres.anotherspacegame.ui
 			
 			_lifeDisplayShape = new flash.display.Sprite();
 			_lifeDisplayShape.graphics.beginFill(0xe34900, 1.0);
-			_lifeDisplayShape.graphics.drawRect(0, 0, 200, 10);
+			_lifeDisplayShape.graphics.drawRect(0, 0, totalLife, 10);
 			_lifeDisplayShape.graphics.endFill();
 			
-			_lifeDisplayData = new BitmapData(200, 10, true, 0x000000);
+			_lifeDisplayData = new BitmapData(totalLife, 10, true, 0x000000);
 			_lifeDisplayData.draw(_lifeDisplayShape);
 			
 			_lifeDisplay = new Image(Texture.fromBitmapData(_lifeDisplayData));
@@ -61,5 +91,16 @@ package com.jonathantorres.anotherspacegame.ui
 		{
 			init();
 		}
+
+		public function get totalLife():Number
+		{
+			return _totalLife;
+		}
+
+		public function set totalLife(value:Number):void
+		{
+			_totalLife = value;
+		}
+
 	}
 }
