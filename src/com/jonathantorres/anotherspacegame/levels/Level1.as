@@ -173,8 +173,6 @@ package com.jonathantorres.anotherspacegame.levels
 							
 							removeChild(playerLaser);
 							_playerShip.lasers.splice(k, 1);
-							
-							continue;
 						}
 					}
 				}
@@ -195,7 +193,6 @@ package com.jonathantorres.anotherspacegame.levels
 							
 							removeChild(playerLaser);
 							_playerShip.lasers.splice(k, 1);
-							continue;
 						}
 					}
 				}
