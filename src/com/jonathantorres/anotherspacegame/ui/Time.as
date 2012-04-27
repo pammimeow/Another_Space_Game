@@ -1,12 +1,13 @@
 package com.jonathantorres.anotherspacegame.ui
 {
 	import flash.display.BitmapData;
+	import flash.utils.getTimer;
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import starling.textures.Texture;
 	import starling.text.TextField;
+	import starling.textures.Texture;
 	
 	/**
 	 * @author Jonathan Torres
@@ -22,8 +23,18 @@ package com.jonathantorres.anotherspacegame.ui
 		public function Time()
 		{
 			super();
-			
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+		}
+		
+		public function showGameTime(startTime:int):void
+		{
+			var passedTime:int = getTimer() - startTime;
+			var seconds:int = Math.floor(passedTime / 1000);
+			var minutes:int = Math.floor(seconds / 60);
+			seconds -= minutes * 60;
+			
+			var time:String = minutes + ':' + String(seconds + 100).substr(1, 2);
+			_gameTime.text = time;
 		}
 		
 		protected function init():void
@@ -39,7 +50,7 @@ package com.jonathantorres.anotherspacegame.ui
 			_timeTitle.x = 4;
 			addChild(_timeTitle);
 			
-			_gameTime = new TextField(50, 28, '10:00', 'Arial', 11, 0xe34900);
+			_gameTime = new TextField(50, 28, '0:00', 'Arial', 11, 0xe34900);
 			_gameTime.x = 30;
 			addChild(_gameTime);
 		}
@@ -47,6 +58,16 @@ package com.jonathantorres.anotherspacegame.ui
 		protected function onAddedToStage(event:Event):void
 		{
 			init();
+		}
+
+		public function get gameTime():TextField
+		{
+			return _gameTime;
+		}
+
+		public function set gameTime(value:TextField):void
+		{
+			_gameTime = value;
 		}
 	}
 }

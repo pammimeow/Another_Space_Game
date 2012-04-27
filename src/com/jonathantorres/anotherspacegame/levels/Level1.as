@@ -15,6 +15,7 @@ package com.jonathantorres.anotherspacegame.levels
 	import flash.events.TimerEvent;
 	import flash.geom.Rectangle;
 	import flash.utils.Timer;
+	import flash.utils.getTimer;
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -58,6 +59,8 @@ package com.jonathantorres.anotherspacegame.levels
 		private var _protectingLifeforce:Lifeforce;
 		
 		private var _gameScore:Number;
+		private var _gameLevel:uint;
+		private var _gameStartTime:int;
 		
 		public function Level1()
 		{
@@ -69,6 +72,11 @@ package com.jonathantorres.anotherspacegame.levels
 		
 		protected function init():void
 		{
+			_shipIsProtected = false;
+			_gameScore = 0;
+			_gameLevel = 1;
+			_gameStartTime = getTimer();
+			
 			_topRock = new Image(Assets.getTexture('Rocks'));
 			_topRock.x = stage.stageWidth;
 			_topRock.y = _topRock.height - 5;
@@ -98,7 +106,7 @@ package com.jonathantorres.anotherspacegame.levels
 			_time.y = stage.stageHeight - 25;
 			addChild(_time);
 			
-			_levelNum = new LevelNumber();
+			_levelNum = new LevelNumber(_gameLevel);
 			_levelNum.x = _time.x + 100;
 			_levelNum.y = stage.stageHeight - 25;
 			addChild(_levelNum);
@@ -125,9 +133,6 @@ package com.jonathantorres.anotherspacegame.levels
 			_lifeforceDeployment.addEventListener(TimerEvent.TIMER, onLifeforceDeploymentTimer);
 			_lifeforceDeployment.start();
 			
-			_shipIsProtected = false;
-			_gameScore = 0;
-			
 			this.addEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}
 		
@@ -139,8 +144,10 @@ package com.jonathantorres.anotherspacegame.levels
 			_bottomRockRect = _bottomRock.getBounds(this.parent);
 			
 			_playerShip.moveShip();
+			_time.showGameTime(_gameStartTime);
 			updateLifeforcePosition();
 			checkPlayerLife();
+			checkGameTime();
 			
 			/*
 			* Collision : Ship with the top and the bottom rocks
@@ -328,6 +335,13 @@ package com.jonathantorres.anotherspacegame.levels
 			
 		}
 		
+		protected function checkGameTime():void
+		{
+			if (_time.gameTime.text == '3:00') {
+				trace('Game Over! - Time is up');
+			}
+		}
+		
 		/*
 		 * Check when life reaches zero. End the game. 
 		 */
@@ -338,7 +352,7 @@ package com.jonathantorres.anotherspacegame.levels
 			if (totalLife <= 0) {
 				trace('Game Over!');
 			} else {
-				trace('Player Life: ' + totalLife);
+				//trace('Player Life: ' + totalLife);
 			}
 		}
 		

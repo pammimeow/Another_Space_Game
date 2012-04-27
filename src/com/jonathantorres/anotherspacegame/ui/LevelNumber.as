@@ -5,8 +5,8 @@ package com.jonathantorres.anotherspacegame.ui
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import starling.textures.Texture;
 	import starling.text.TextField;
+	import starling.textures.Texture;
 	
 	/**
 	 * @author Jonathan Torres
@@ -17,12 +17,13 @@ package com.jonathantorres.anotherspacegame.ui
 		private var _rectangleData:BitmapData;
 		private var _rectangle:Image;
 		private var _levelTitle:TextField;
-		private var _gameLevel:TextField;
+		private var _gameLevelText:TextField;
+		private var _gameLevel:uint;
 		
-		public function LevelNumber()
+		public function LevelNumber(level:uint)
 		{
 			super();
-			
+			_gameLevel = level;
 			this.addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		
@@ -39,14 +40,25 @@ package com.jonathantorres.anotherspacegame.ui
 			_levelTitle.x = 8;
 			addChild(_levelTitle);
 			
-			_gameLevel = new TextField(20, 28, '10', 'Arial', 11, 0xe34900);
-			_gameLevel.x = 45;
-			addChild(_gameLevel);
+			_gameLevelText = new TextField(20, 28, String(_gameLevel), 'Arial', 11, 0xe34900);
+			_gameLevelText.x = 45;
+			addChild(_gameLevelText);
 		}
 		
 		protected function onAddedToStage(event:Event):void
 		{
 			init();
 		}
+
+		public function get gameLevel():uint
+		{
+			return _gameLevel;
+		}
+
+		public function set gameLevel(value:uint):void
+		{
+			_gameLevel = value;
+		}
+
 	}
 }
