@@ -1,6 +1,6 @@
 package com.jonathantorres.anotherspacegame
 {
-	import com.jonathantorres.anotherspacegame.levels.Level1;
+	import com.jonathantorres.anotherspacegame.levels.Level;
 	import com.jonathantorres.anotherspacegame.menu.MainMenu;
 	
 	import starling.display.Image;
@@ -18,7 +18,7 @@ package com.jonathantorres.anotherspacegame
 		private var _playerShip:Image;
 		private var _mainMenu:MainMenu;
 		private var _background:Image;
-		private var _level1:Level1;
+		private var _level1:Level;
 		
 		private var _mainTitle:TextField;
 		

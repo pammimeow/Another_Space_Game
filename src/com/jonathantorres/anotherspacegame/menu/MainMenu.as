@@ -1,7 +1,7 @@
 package com.jonathantorres.anotherspacegame.menu
 {
 	import com.jonathantorres.anotherspacegame.Game;
-	import com.jonathantorres.anotherspacegame.levels.Level1;
+	import com.jonathantorres.anotherspacegame.levels.Level;
 	
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -30,7 +30,7 @@ package com.jonathantorres.anotherspacegame.menu
 		protected function init():void
 		{
 			_menuItemsNames = new Array(
-					{ name : 'Play', sprite : Level1 }, 
+					{ name : 'Play', sprite : Level }, 
 					{ name : 'Settings', sprite : SettingsMenu }, 
 					{ name : 'Instructions', sprite : InstructionsMenu }, 
 					{ name : 'Highscores', sprite : HighscoresMenu }, 
