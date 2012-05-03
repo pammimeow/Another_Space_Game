@@ -85,6 +85,12 @@ package com.jonathantorres.anotherspacegame.objects
 			lasers.push(laser);
 		}
 		
+		public function removeListeners():void
+		{
+			stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+			stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyUp);
+		}
+		
 		protected function onKeyUp(event:KeyboardEvent):void
 		{
 			_ax = 0;
