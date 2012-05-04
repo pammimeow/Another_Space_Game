@@ -32,8 +32,7 @@ package com.jonathantorres.anotherspacegame.menu
 			_menuItemsNames = new Array(
 					{ name : 'Play', sprite : Level }, 
 					{ name : 'Settings', sprite : SettingsMenu }, 
-					{ name : 'Instructions', sprite : InstructionsMenu }, 
-					{ name : 'Highscores', sprite : HighscoresMenu }, 
+					{ name : 'Instructions', sprite : InstructionsMenu },
 					{ name : 'Credits', sprite : CreditsMenu }
 			);
 			
@@ -41,7 +40,7 @@ package com.jonathantorres.anotherspacegame.menu
 			
 			_menu = new Sprite();
 			_menu.x = stage.stageWidth * 0.5;
-			_menu.y = stage.stageHeight * 0.5;
+			_menu.y = (stage.stageHeight * 0.5) + 30;
 			addChild(_menu);
 			
 			for (var i:int = 0; i < _menuItemsNames.length; i++) {
