@@ -1,6 +1,7 @@
 package com.jonathantorres.anotherspacegame.levels
 {
 	import com.jonathantorres.anotherspacegame.Assets;
+	import com.jonathantorres.anotherspacegame.Game;
 	import com.jonathantorres.anotherspacegame.menu.GameOverMenu;
 	import com.jonathantorres.anotherspacegame.objects.Asteroid;
 	import com.jonathantorres.anotherspacegame.objects.EnemyShip;
@@ -17,10 +18,6 @@ package com.jonathantorres.anotherspacegame.levels
 	import flash.geom.Rectangle;
 	import flash.utils.Timer;
 	import flash.utils.getTimer;
-	
-	import flashx.textLayout.tlf_internal;
-	
-	import org.osmf.events.TimeEvent;
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -386,6 +383,7 @@ package com.jonathantorres.anotherspacegame.levels
 			var parent:Sprite = Sprite(parent);
 			parent.removeChild(this);
 			parent.addChild(new GameOverMenu());
+			parent.addChild(Game(parent).mainTitle);
 		}
 		
 		protected function cleanUp():void
@@ -457,54 +455,27 @@ package com.jonathantorres.anotherspacegame.levels
 			
 			_playerShip.removeListeners();
 			removeChild(_playerShip);
-			//_playerShip = null;
-			//_playerShipRect = null;
 			
 			_enemyDeployment.stop();
 			_enemyDeployment.removeEventListener(TimerEvent.TIMER, onEnemyDeploymentTimer);
 			_enemyDeployment.removeEventListener(TimerEvent.TIMER_COMPLETE, onEnemyDeploymentTimerComplete);
-			//_enemyDeployment = null;
 			
 			_asteroidDeployment.stop();
 			_asteroidDeployment.removeEventListener(TimerEvent.TIMER, onAsteroidDeploymentTimer);
 			_asteroidDeployment.removeEventListener(TimerEvent.TIMER_COMPLETE, onAsteroidDeploymentTimerComplete);
-			//_asteroidDeployment = null;
 			
 			_healthbarsDeployment.stop();
 			_healthbarsDeployment.removeEventListener(TimerEvent.TIMER, onHealthbarDeploymentTimer);
-			//_healthbarsDeployment = null;
 			
 			_lifeforceDeployment.stop();
 			_lifeforceDeployment.removeEventListener(TimerEvent.TIMER, onLifeforceDeploymentTimer);
-			//_lifeforceDeployment = null;
 			
 			removeChild(_topRock);
-			//_topRock = null;
-			//_topRockRect = null;
-			
 			removeChild(_bottomRock);
-			//_bottomRock = null;
-			//_bottomRockRect = null;
-			
 			removeChild(_life);
-			//_life = null;
-			
 			removeChild(_score);
-			//_score = null;
-			
 			removeChild(_time);
-			//_time = null;
-			
 			removeChild(_levelNum);
-			//_levelNum = null;
-			
-			/*_playerLasers = null;
-			_enemyShips = null;
-			_asteroids = null;
-			_healthbars = null;
-			_lifeforces = null;
-			_typesOfEnemies = null;
-			_typesOfAsteroids = null;*/
 			
 			gameOver();
 		}
