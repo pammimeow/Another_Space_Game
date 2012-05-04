@@ -382,7 +382,7 @@ package com.jonathantorres.anotherspacegame.levels
 		{
 			var parent:Sprite = Sprite(parent);
 			parent.removeChild(this);
-			parent.addChild(new GameOverMenu());
+			parent.addChild(new GameOverMenu(_gameScore));
 			parent.addChild(Game(parent).mainTitle);
 		}
 		
