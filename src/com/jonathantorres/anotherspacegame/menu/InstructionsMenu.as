@@ -17,7 +17,7 @@ package com.jonathantorres.anotherspacegame.menu
 		private var _controlsText:TextField;
 		private var _objectivesText:TextField;
 		
-		private const CONTROLS_MESSAGE:String = 'Use W-A-S-D to move the ship. \nAvoid the asteroids and the enemyships. Shoot them down!';
+		private const CONTROLS_MESSAGE:String = 'Use W-A-S-D to move the ship. \nAvoid the asteroids and the enemy ships. Shoot them down!';
 		private const OBJECTIVES_MESSAGE:String = 'Collect the lifeforces for protection. \nHealth icons restore health.';
 		
 		public function InstructionsMenu()
