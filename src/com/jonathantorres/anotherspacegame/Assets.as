@@ -75,9 +75,16 @@ package com.jonathantorres.anotherspacegame
 		[Embed(source="../../../../assets/textures/the_space.jpg")]
 		private static const SpaceWorld:Class;
 		
-		/*Some Fonts*/
+		/*Fonts*/
 		//[Embed(source="../../../../assets/fonts/CharcoalCY.dfont", embedAsCFF='false', fontName='CharcoalCY')]
 		//private static const Charcoal:Class;
+		
+		/*Sounds*/
+		[Embed(source="../../../../assets/sounds/game_music.mp3")]
+		private static const BackgroundMusic:Class;
+		
+		[Embed(source="../../../../assets/sounds/laser.mp3")]
+		private static const LaserSound:Class;
 		
 		private static var _textureAssets:Dictionary = new Dictionary();
 		private static var _xmlAssets:Dictionary = new Dictionary();
@@ -104,9 +111,16 @@ package com.jonathantorres.anotherspacegame
 			return _xmlAssets[name];
 		}
 		
+		public static function prepareSounds():void
+		{
+			_soundAssets['BackgroundMusic'] = new BackgroundMusic();
+			_soundAssets['LaserSound'] = new LaserSound();
+		}
+		
 		public static function getSound(name:String):Sound
 		{
-			return null;
+			var sound:Sound = Sound(_soundAssets[name]);
+			return sound;
 		}
 	}
 }
