@@ -1,7 +1,9 @@
 package com.jonathantorres.anotherspacegame.objects
 {
 	import com.jonathantorres.anotherspacegame.Assets;
+	import com.jonathantorres.anotherspacegame.utils.SoundManager;
 	
+	import flash.media.Sound;
 	import flash.ui.Keyboard;
 	
 	import starling.core.Starling;
@@ -78,6 +80,9 @@ package com.jonathantorres.anotherspacegame.objects
 		
 		public function shoot():void
 		{
+			var shootSound:Sound = Assets.getSound('LaserSound');
+			if (SoundManager.sfxOn) shootSound.play();
+			
 			var laser:Laser = new Laser('player');
 			laser.x = this.x - 5;
 			laser.y = this.y - 3;

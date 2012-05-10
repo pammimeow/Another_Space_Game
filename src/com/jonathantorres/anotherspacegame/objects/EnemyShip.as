@@ -1,8 +1,10 @@
 package com.jonathantorres.anotherspacegame.objects
 {
 	import com.jonathantorres.anotherspacegame.Assets;
+	import com.jonathantorres.anotherspacegame.utils.SoundManager;
 	
 	import flash.events.TimerEvent;
+	import flash.media.Sound;
 	import flash.utils.Timer;
 	
 	import starling.display.Image;
@@ -77,6 +79,8 @@ package com.jonathantorres.anotherspacegame.objects
 		public function shoot():void
 		{
 			var shipColor:String = _color;
+			var shootSound:Sound = Assets.getSound('LaserSound');
+			if (SoundManager.sfxOn) shootSound.play();
 			
 			if (shipColor == 'gray') {
 				shipColor = 'blue';

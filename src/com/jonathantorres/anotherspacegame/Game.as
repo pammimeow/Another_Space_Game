@@ -3,6 +3,9 @@ package com.jonathantorres.anotherspacegame
 	import com.jonathantorres.anotherspacegame.levels.Level;
 	import com.jonathantorres.anotherspacegame.menu.MainMenu;
 	
+	import flash.media.Sound;
+	import flash.media.SoundChannel;
+	
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -21,6 +24,8 @@ package com.jonathantorres.anotherspacegame
 		private var _level1:Level;
 		
 		private var _mainTitle:TextField;
+		private var _bgAudio:Sound;
+		public static var bgAudioChannel:SoundChannel;
 		
 		public function Game()
 		{
@@ -31,6 +36,13 @@ package com.jonathantorres.anotherspacegame
 		
 		protected function init():void
 		{
+			/*Get music ready*/
+			Assets.prepareSounds();
+			
+			/*Background Music*/
+			_bgAudio = Assets.getSound('BackgroundMusic');
+			bgAudioChannel = _bgAudio.play(0, int.MAX_VALUE);
+			
 			/*Space Background*/
 			_background = new Image(Assets.getTexture('SpaceWorld'));
 			_background.x = 0;
