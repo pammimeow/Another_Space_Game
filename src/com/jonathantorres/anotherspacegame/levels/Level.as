@@ -356,7 +356,7 @@ package com.jonathantorres.anotherspacegame.levels
 		protected function checkGameTime():void
 		{
 			if (_time != null) {
-				if (_time.gameTime.text == '3:00') {
+				if (_time.gameTime.text == '2:00') {
 					//trace('Game Over! - Time is up');
 					cleanUp();
 				}
