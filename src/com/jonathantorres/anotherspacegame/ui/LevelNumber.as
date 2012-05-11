@@ -1,5 +1,7 @@
 package com.jonathantorres.anotherspacegame.ui
 {
+	import com.jonathantorres.anotherspacegame.Assets;
+	
 	import flash.display.BitmapData;
 	
 	import starling.display.Image;
@@ -36,11 +38,11 @@ package com.jonathantorres.anotherspacegame.ui
 			_rectangle = new Image(Texture.fromBitmapData(_rectangleData));
 			addChild(_rectangle);
 			
-			_levelTitle = new TextField(40, 28, 'LEVEL', 'Arial', 11, 0xFFFFFF);
+			_levelTitle = new TextField(40, 28, 'LEVEL', Assets.getFont('Futura').fontName, 14, 0xFFFFFF);
 			_levelTitle.x = 8;
 			addChild(_levelTitle);
 			
-			_gameLevelText = new TextField(20, 28, String(_gameLevel), 'Arial', 11, 0xe34900);
+			_gameLevelText = new TextField(20, 28, String(_gameLevel), Assets.getFont('Futura').fontName, 14, 0xe34900);
 			_gameLevelText.x = 45;
 			addChild(_gameLevelText);
 		}

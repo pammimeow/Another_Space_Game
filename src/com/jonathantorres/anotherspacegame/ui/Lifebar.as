@@ -1,5 +1,7 @@
 package com.jonathantorres.anotherspacegame.ui
 {
+	import com.jonathantorres.anotherspacegame.Assets;
+	
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	
@@ -83,7 +85,7 @@ package com.jonathantorres.anotherspacegame.ui
 			_lifeDisplay.y = 9;
 			addChild(_lifeDisplay);
 			
-			_lifeText = new TextField(50, 28, 'LIFE', 'Arial', 11, 0xFFFFFF);
+			_lifeText = new TextField(50, 28, 'LIFE', Assets.getFont('Futura').fontName, 14, 0xFFFFFF);
 			addChild(_lifeText);
 		}
 		

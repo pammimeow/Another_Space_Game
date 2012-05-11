@@ -1,5 +1,7 @@
 package com.jonathantorres.anotherspacegame.ui
 {
+	import com.jonathantorres.anotherspacegame.Assets;
+	
 	import flash.display.BitmapData;
 	
 	import starling.display.Image;
@@ -49,11 +51,11 @@ package com.jonathantorres.anotherspacegame.ui
 			_rectangle = new Image(Texture.fromBitmapData(_rectangleData));
 			addChild(_rectangle);
 			
-			_scoreTitle = new TextField(50, 28, 'SCORE', 'Arial', 11, 0xFFFFFF);
+			_scoreTitle = new TextField(50, 28, 'SCORE', Assets.getFont('Futura').fontName, 14, 0xFFFFFF);
 			_scoreTitle.x = 8;
 			addChild(_scoreTitle);
 			
-			_gameScore = new TextField(80, 28, '0', 'Arial', 11, 0xe34900);
+			_gameScore = new TextField(80, 28, '0', Assets.getFont('Futura').fontName, 14, 0xe34900);
 			_gameScore.hAlign = HAlign.LEFT;
 			_gameScore.x = 58;
 			addChild(_gameScore);

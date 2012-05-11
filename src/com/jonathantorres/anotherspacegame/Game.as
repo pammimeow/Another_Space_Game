@@ -50,7 +50,7 @@ package com.jonathantorres.anotherspacegame
 			addChild(_background);
 			
 			/*Main Title*/
-			_mainTitle = new TextField(500, 100, 'Another Space Game', 'Arial', 50, 0xFF0000);
+			_mainTitle = new TextField(900, 100, 'Another Space Game', Assets.getFont('ArialNarrow').fontName, 80, 0xFF0000);
 			_mainTitle.autoScale = true;
 			_mainTitle.x = (stage.stageWidth * 0.5) - (_mainTitle.width * 0.5);
 			_mainTitle.y = 30;

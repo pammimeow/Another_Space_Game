@@ -1,5 +1,6 @@
 package com.jonathantorres.anotherspacegame.menu
 {
+	import com.jonathantorres.anotherspacegame.Assets;
 	import com.jonathantorres.anotherspacegame.Game;
 	import com.jonathantorres.anotherspacegame.levels.Level;
 	
@@ -37,33 +38,33 @@ package com.jonathantorres.anotherspacegame.menu
 			this.x = 0;
 			this.y = 0;
 			
-			_gameOverTitle = new TextField(500, 100, 'Game Over', 'Arial', 30, 0xFFFFFF);
+			_gameOverTitle = new TextField(500, 100, 'GAME OVER', Assets.getFont('ArialNarrow').fontName, 30, 0xFFFFFF);
 			_gameOverTitle.autoScale = true;
 			_gameOverTitle.x = (stage.stageWidth * 0.5) - (_gameOverTitle.width * 0.5);
 			_gameOverTitle.y = 180;
 			addChild(_gameOverTitle);
 			
-			_backToMainMenu = new TextField(150, 100, 'Back to Main Menu', 'Arial', 15, 0xFFFFFF);
+			_backToMainMenu = new TextField(150, 100, 'BACK TO MAIN MENU', Assets.getFont('ArialNarrow').fontName, 15, 0xFFFFFF);
 			_backToMainMenu.autoScale = true;
 			_backToMainMenu.x = 20;
 			_backToMainMenu.y = stage.stageHeight - 80;
 			_backToMainMenu.addEventListener(TouchEvent.TOUCH, onBackToMainMenuTouch);
 			addChild(_backToMainMenu);
 			
-			_playAgainText = new TextField(150, 60, 'Play again?', 'Arial', 12, 0xE34900);
+			_playAgainText = new TextField(150, 60, 'PLAY AGAIN?', Assets.getFont('Futura').fontName, 12, 0xE34900);
 			_playAgainText.autoScale = true;
 			_playAgainText.x = (stage.stageWidth * 0.5) - (_playAgainText.width * 0.5);
 			_playAgainText.y = 240;
 			_playAgainText.addEventListener(TouchEvent.TOUCH, onPlayAgainTouch);
 			addChild(_playAgainText);
 			
-			_playerScoreTitle = new TextField(150, 60, 'Your score: ', 'Arial', 14, 0xE34900);
+			_playerScoreTitle = new TextField(150, 60, 'YOUR SCORE: ', Assets.getFont('Futura').fontName, 14, 0xE34900);
 			_playerScoreTitle.autoScale = true;
 			_playerScoreTitle.x = ((stage.stageWidth * 0.5) - (_playerScoreTitle.width * 0.5)) - 5;
 			_playerScoreTitle.y = 300;
 			addChild(_playerScoreTitle);
 			
-			_playerScoreText = new TextField(150, 60, String(_finishedScore), 'Arial', 14, 0xFFFFFF);
+			_playerScoreText = new TextField(150, 60, String(_finishedScore), Assets.getFont('Futura').fontName, 14, 0xFFFFFF);
 			_playerScoreText.autoScale = true;
 			_playerScoreText.hAlign = HAlign.LEFT;
 			_playerScoreText.x = _playerScoreTitle.x + 110;

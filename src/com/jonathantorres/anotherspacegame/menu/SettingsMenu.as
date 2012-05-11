@@ -43,39 +43,39 @@ package com.jonathantorres.anotherspacegame.menu
 			
 			_bgAudioChannel = Game.bgAudioChannel;
 			
-			_settingsTitle = new TextField(500, 100, 'Settings', 'Arial', 30, 0xFF0000);
+			_settingsTitle = new TextField(500, 100, 'SETTINGS', Assets.getFont('ArialNarrow').fontName, 30, 0xFF0000);
 			_settingsTitle.autoScale = true;
 			_settingsTitle.x = (stage.stageWidth * 0.5) - (_settingsTitle.width * 0.5);
 			_settingsTitle.y = 120;
 			addChild(_settingsTitle);
 			
-			_audioTitle = new TextField(200, 50, 'Background Music', 'Arial', 16, 0xFFFFFF);
+			_audioTitle = new TextField(200, 50, 'BACKGROUND MUSIC', Assets.getFont('Futura').fontName, 16, 0xFFFFFF);
 			_audioTitle.autoScale = true;
 			_audioTitle.x = (stage.stageWidth * 0.5) - (_audioTitle.width * 0.5) - 60;
 			_audioTitle.y = 200;
 			addChild(_audioTitle);
 			
-			_audioSwitch = new TextField(100, 50, 'ON', 'Arial', 16, 0xFF5201);
+			_audioSwitch = new TextField(100, 50, 'ON', Assets.getFont('Futura').fontName, 16, 0xFF5201);
 			_audioSwitch.autoScale = true;
 			_audioSwitch.x = _audioTitle.x + 145;
 			_audioSwitch.y = _audioTitle.y;
 			_audioSwitch.addEventListener(TouchEvent.TOUCH, onAudioSwitchTouch);
 			addChild(_audioSwitch);
 			
-			_sfxTitle = new TextField(200, 50, 'Sound Effects', 'Arial', 16, 0xFFFFFF);
+			_sfxTitle = new TextField(200, 50, 'SOUND EFFECTS', Assets.getFont('Futura').fontName, 16, 0xFFFFFF);
 			_sfxTitle.autoScale = true;
 			_sfxTitle.x = (stage.stageWidth * 0.5) - (_sfxTitle.width * 0.5) - 46;
 			_sfxTitle.y = 240;
 			addChild(_sfxTitle);
 			
-			_sfxSwitch = new TextField(100, 50, 'ON', 'Arial', 16, 0xFF5201);
+			_sfxSwitch = new TextField(100, 50, 'ON', Assets.getFont('Futura').fontName, 16, 0xFF5201);
 			_sfxSwitch.autoScale = true;
 			_sfxSwitch.x = _sfxTitle.x + 130;
 			_sfxSwitch.y = _sfxTitle.y;
 			_sfxSwitch.addEventListener(TouchEvent.TOUCH, onSfxSwitchTouch);
 			addChild(_sfxSwitch);
 			
-			_backToMainMenu = new TextField(150, 100, 'Back to Main Menu', 'Arial', 15, 0xFFFFFF);
+			_backToMainMenu = new TextField(150, 100, 'BACK TO MAIN MENU', Assets.getFont('ArialNarrow').fontName, 15, 0xFFFFFF);
 			_backToMainMenu.autoScale = true;
 			_backToMainMenu.x = 20;
 			_backToMainMenu.y = stage.stageHeight - 80;

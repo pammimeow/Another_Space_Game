@@ -1,5 +1,7 @@
 package com.jonathantorres.anotherspacegame.menu
 {
+	import com.jonathantorres.anotherspacegame.Assets;
+	
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
@@ -17,8 +19,8 @@ package com.jonathantorres.anotherspacegame.menu
 		private var _controlsText:TextField;
 		private var _objectivesText:TextField;
 		
-		private const CONTROLS_MESSAGE:String = 'Use W-A-S-D to move the ship. \nAvoid the asteroids and the enemy ships. Shoot them down!';
-		private const OBJECTIVES_MESSAGE:String = 'Collect the lifeforces for protection. \nHealth icons restore health.';
+		private const CONTROLS_MESSAGE:String = 'USE W-A-S-D TO MOVE THE SHIP. \nAVOID THE ASTEROIDS AND THE ENEMY SHIPS. SHOOT THEM DOWN!';
+		private const OBJECTIVES_MESSAGE:String = 'COLLECT THE LIFEFORCES FOR PROTECTION. \nHEALTH ICONS RESTORE HEALTH.';
 		
 		public function InstructionsMenu()
 		{
@@ -33,26 +35,26 @@ package com.jonathantorres.anotherspacegame.menu
 			this.x = 0;
 			this.y = 0;
 			
-			_instructionsTitle = new TextField(500, 100, 'Instructions', 'Arial', 30, 0xFF0000);
+			_instructionsTitle = new TextField(500, 100, 'INSTRUCTIONS', Assets.getFont('ArialNarrow').fontName, 30, 0xFF0000);
 			_instructionsTitle.autoScale = true;
 			_instructionsTitle.x = (stage.stageWidth * 0.5) - (_instructionsTitle.width * 0.5);
 			_instructionsTitle.y = 120;
 			addChild(_instructionsTitle);
 			
-			_backToMainMenu = new TextField(150, 100, 'Back to Main Menu', 'Arial', 15, 0xFFFFFF);
+			_backToMainMenu = new TextField(150, 100, 'BACK TO MAIN MENU', Assets.getFont('ArialNarrow').fontName, 15, 0xFFFFFF);
 			_backToMainMenu.autoScale = true;
 			_backToMainMenu.x = 20;
 			_backToMainMenu.y = stage.stageHeight - 80;
 			_backToMainMenu.addEventListener(TouchEvent.TOUCH, onBackToMainMenuTouch);
 			addChild(_backToMainMenu);
 			
-			_controlsText = new TextField(400, 100, CONTROLS_MESSAGE, 'Arial', 14, 0x929090);
+			_controlsText = new TextField(400, 100, CONTROLS_MESSAGE, Assets.getFont('Futura').fontName, 14, 0x929090);
 			_controlsText.autoScale = true;
 			_controlsText.x = (stage.stageWidth * 0.5) - (_controlsText.width * 0.5);
 			_controlsText.y = 190;
 			addChild(_controlsText);
 			
-			_objectivesText = new TextField(300, 100, OBJECTIVES_MESSAGE, 'Arial', 14, 0x929090);
+			_objectivesText = new TextField(300, 100, OBJECTIVES_MESSAGE, Assets.getFont('Futura').fontName, 14, 0x929090);
 			_objectivesText.autoScale = true;
 			_objectivesText.x = (stage.stageWidth * 0.5) - (_objectivesText.width * 0.5);
 			_objectivesText.y = 250;

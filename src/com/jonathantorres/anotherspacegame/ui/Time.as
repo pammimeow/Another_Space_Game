@@ -1,5 +1,7 @@
 package com.jonathantorres.anotherspacegame.ui
 {
+	import com.jonathantorres.anotherspacegame.Assets;
+	
 	import flash.display.BitmapData;
 	import flash.utils.getTimer;
 	
@@ -46,11 +48,11 @@ package com.jonathantorres.anotherspacegame.ui
 			_rectangle = new Image(Texture.fromBitmapData(_rectangleData));
 			addChild(_rectangle);
 			
-			_timeTitle = new TextField(40, 28, 'TIME', 'Arial', 11, 0xFFFFFF);
+			_timeTitle = new TextField(40, 28, 'TIME', Assets.getFont('Futura').fontName, 14, 0xFFFFFF);
 			_timeTitle.x = 4;
 			addChild(_timeTitle);
 			
-			_gameTime = new TextField(50, 28, '0:00', 'Arial', 11, 0xe34900);
+			_gameTime = new TextField(50, 28, '0:00', Assets.getFont('Futura').fontName, 14, 0xe34900);
 			_gameTime.x = 30;
 			addChild(_gameTime);
 		}

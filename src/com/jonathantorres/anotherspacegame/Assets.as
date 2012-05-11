@@ -2,6 +2,7 @@ package com.jonathantorres.anotherspacegame
 {
 	import flash.display.Bitmap;
 	import flash.media.Sound;
+	import flash.text.Font;
 	import flash.utils.Dictionary;
 	
 	import starling.textures.Texture;
@@ -76,8 +77,11 @@ package com.jonathantorres.anotherspacegame
 		private static const SpaceWorld:Class;
 		
 		/*Fonts*/
-		//[Embed(source="../../../../assets/fonts/CharcoalCY.dfont", embedAsCFF='false', fontName='CharcoalCY')]
-		//private static const Charcoal:Class;
+		[Embed(source="../../../../assets/fonts/Arial-Narrow.ttf", embedAsCFF="false", fontName="Arial Narrow", mimeType="application/x-font-truetype")]
+		private static const ArialNarrow:Class;
+		
+		[Embed(source="../../../../assets/fonts/Futura-CondensedMedium.ttf", embedAsCFF="false", fontName="Futura Condensed Medium", fontFamily="Futura", mimeType="application/x-font-truetype")]
+		private static const Futura:Class;
 		
 		/*Sounds*/
 		[Embed(source="../../../../assets/sounds/game_music.mp3")]
@@ -89,6 +93,7 @@ package com.jonathantorres.anotherspacegame
 		private static var _textureAssets:Dictionary = new Dictionary();
 		private static var _xmlAssets:Dictionary = new Dictionary();
 		private static var _soundAssets:Dictionary = new Dictionary();
+		private static var _fontAssets:Dictionary = new Dictionary();
 		
 		public function Assets() { }
 		
@@ -121,6 +126,12 @@ package com.jonathantorres.anotherspacegame
 		{
 			var sound:Sound = Sound(_soundAssets[name]);
 			return sound;
+		}
+		
+		public static function getFont(name:String):Font
+		{
+			var font:Font = new Assets[name]();
+			return font;
 		}
 	}
 }

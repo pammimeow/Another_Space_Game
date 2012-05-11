@@ -1,5 +1,6 @@
 package com.jonathantorres.anotherspacegame.menu
 {
+	import com.jonathantorres.anotherspacegame.Assets;
 	import com.jonathantorres.anotherspacegame.Game;
 	import com.jonathantorres.anotherspacegame.levels.Level;
 	
@@ -30,10 +31,10 @@ package com.jonathantorres.anotherspacegame.menu
 		protected function init():void
 		{
 			_menuItemsNames = new Array(
-					{ name : 'Play', sprite : Level }, 
-					{ name : 'Settings', sprite : SettingsMenu }, 
-					{ name : 'Instructions', sprite : InstructionsMenu },
-					{ name : 'Credits', sprite : CreditsMenu }
+					{ name : 'PLAY', sprite : Level }, 
+					{ name : 'SETTINGS', sprite : SettingsMenu }, 
+					{ name : 'INSTRUCTIONS', sprite : InstructionsMenu },
+					{ name : 'CREDITS', sprite : CreditsMenu }
 			);
 			
 			_menuItems = new Array();
@@ -44,7 +45,7 @@ package com.jonathantorres.anotherspacegame.menu
 			addChild(_menu);
 			
 			for (var i:int = 0; i < _menuItemsNames.length; i++) {
-				var menuTitle:TextField = new TextField(200, 35, _menuItemsNames[i].name, 'Arial', 24, 0xFFFFFF);
+				var menuTitle:TextField = new TextField(200, 35, _menuItemsNames[i].name, Assets.getFont('Futura').fontName, 24, 0xFFFFFF);
 				menuTitle.x = -(menuTitle.width * 0.5);
 				menuTitle.y = (i * (30 + 15)) - 60;
 				menuTitle.addEventListener(TouchEvent.TOUCH, onMenuTitleTouch);
@@ -62,7 +63,7 @@ package com.jonathantorres.anotherspacegame.menu
 			
 			//click
 			if (touch.phase == 'ended') {
-				if (target.text == 'Play') parentSprite.removeChild(Game(parentSprite).mainTitle);
+				if (target.text == 'PLAY') parentSprite.removeChild(Game(parentSprite).mainTitle);
 				parentSprite.removeChild(this);
 				
 				for (var j:int = 0; j < _menuItems.length; j++) {
