@@ -11,7 +11,7 @@ package com.jonathantorres.anotherspacegame.objects
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.KeyboardEvent;
-	import starling.extensions.ParticleDesignerPS;
+	import starling.extensions.PDParticleSystem;
 	
 	/**
 	 * @author Jonathan Torres
@@ -19,7 +19,7 @@ package com.jonathantorres.anotherspacegame.objects
 	public class PlayerShip extends Sprite
 	{
 		private var _ship:Image;
-		private var _fire:ParticleDesignerPS;
+		private var _fire:PDParticleSystem;
 		private var _moveLeft:Boolean;
 		private var _moveRight:Boolean;
 		private var _moveUp:Boolean;
@@ -48,7 +48,7 @@ package com.jonathantorres.anotherspacegame.objects
 			_ship.x = -_ship.width;
 			_ship.y = -_ship.height * 0.5;
 			
-			_fire = new ParticleDesignerPS(Assets.getParticleXML('MainShipThrustParticle'), 
+			_fire = new PDParticleSystem(Assets.getParticleXML('MainShipThrustParticle'), 
 										   Assets.getTexture('MainShipThrust'));
 			_fire.emitterX = (-_ship.width) + 20;
 			_fire.emitterY = 5;
