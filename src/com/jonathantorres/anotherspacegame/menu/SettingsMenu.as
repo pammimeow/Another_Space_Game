@@ -18,7 +18,6 @@ package com.jonathantorres.anotherspacegame.menu
 	 */
 	public class SettingsMenu extends Sprite
 	{
-
 		private var _settingsTitle:TextField;
 		private var _backToMainMenu:TextField;
 		private var _audioTitle:TextField;
