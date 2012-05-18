@@ -76,6 +76,12 @@ package com.jonathantorres.anotherspacegame.objects
 			} else if ((this.x - _ship.width) >= stage.stageWidth) {
 				this.x = 0;
 			}
+			
+			if (this.y <= 0) {
+				this.y = stage.stageHeight + _ship.height;
+			} else if ((this.y - _ship.height) >= stage.stageHeight) {
+				this.y = 0;
+			}
 		}
 		
 		public function shoot():void
