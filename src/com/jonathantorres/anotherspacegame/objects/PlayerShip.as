@@ -98,8 +98,10 @@ package com.jonathantorres.anotherspacegame.objects
 		
 		public function removeListeners():void
 		{
-			stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
-			stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyUp);
+			if (stage != null) {
+				stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+				stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyUp);
+			}
 		}
 		
 		protected function onKeyUp(event:KeyboardEvent):void

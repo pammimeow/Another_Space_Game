@@ -168,20 +168,19 @@ package com.jonathantorres.anotherspacegame.levels
 			/*
 			 * Animation and Collisions : Player ship and his lasers
 			 */
-			for (var k:int = 0; k < _playerLasers.length; k++) {
+			for (var k:int = _playerLasers.length - 1; k >= 0; k--) {
 				var playerLaser:Laser = Laser(_playerLasers[k]);
 				var playerLaserRect:Rectangle = playerLaser.getBounds(this.parent);
 				
 				playerLaser.animate('right');
 				
-				for (var l:int = 0; l < _enemyShips.length; l++) {
+				for (var l:int = _enemyShips.length - 1; l >= 0; l--) {
 					var enemyShip:EnemyShip = _enemyShips[l];
 					
 					if (this.contains(enemyShip)) {
 						var enemyShipRect:Rectangle = enemyShip.getBounds(this.parent);
 						
 						if (playerLaserRect.intersects(enemyShipRect)) {
-							//trace('Player hits an enemy');
 							_gameScore += enemyShip.scoreValue;
 							_score.updateScore(_gameScore);
 							
@@ -194,14 +193,13 @@ package com.jonathantorres.anotherspacegame.levels
 					}
 				}
 				
-				for (var o:int = 0; o < _asteroids.length; o++) {
+				for (var o:int = _asteroids.length - 1; o >= 0; o--) {
 					var asteroid:Asteroid = _asteroids[o];
 					
 					if (this.contains(asteroid)) {
 						var asteroidRect:Rectangle = asteroid.getBounds(this.parent);
 						
 						if (playerLaserRect.intersects(asteroidRect)) {
-							//trace('Player hits an asteroid');
 							_gameScore += asteroid.scoreValue;
 							_score.updateScore(_gameScore);
 							
@@ -218,7 +216,7 @@ package com.jonathantorres.anotherspacegame.levels
 			/*
 			 * Animation and Collisions : Enemy Ships and their lasers
 			 */
-			for (var i:int = 0; i < _enemyShips.length; i++) {
+			for (var i:int = _enemyShips.length - 1; i >= 0; i--) {
 				var enemy:EnemyShip = _enemyShips[i];
 				var enemyLasers:Array = enemy.lasers;
 				enemy.animate();
@@ -227,7 +225,6 @@ package com.jonathantorres.anotherspacegame.levels
 					removeChild(enemy);
 					_enemyShips.splice(i, 1);
 					continue;
-					//trace('Enemies: ' + _enemyShips.length);
 				}
 				
 				if (this.contains(enemy)) {
@@ -240,18 +237,16 @@ package com.jonathantorres.anotherspacegame.levels
 						removeChild(enemy);
 						_enemyShips.splice(i, 1);
 						continue;
-						//trace('Player ship hits enemy ship');
 					}
 					
 					if ((enemyRect.intersects(_topRockRect)) || (enemyRect.intersects(_bottomRockRect))) {
 						removeChild(enemy);
 						_enemyShips.splice(i, 1);
 						continue;
-						//trace('Enemy hits top or bottom rocks');
 					}
 				}
 				
-				for (var j:int = 0; j < enemyLasers.length; j++) {
+				for (var j:int = enemyLasers.length - 1; j >= 0; j--) {
 					var laser:Laser = enemyLasers[j];
 					laser.animate('left');
 					
@@ -259,14 +254,12 @@ package com.jonathantorres.anotherspacegame.levels
 						removeChild(laser);
 						enemyLasers.splice(j, 1);
 						continue;
-						//trace('Enemies: ' + _enemyShips.length);
 					}
 					
 					if (this.contains(laser)) {
 						var laserRect:Rectangle = laser.getBounds(this.parent);
 						
 						if (_playerShipRect.intersects(laserRect)) {
-							//trace('enemy shot player');
 							if (!_shipIsProtected) _life.decreaseLife(enemy.damage);
 							removeProtectingLifeforce();
 							
@@ -281,15 +274,20 @@ package com.jonathantorres.anotherspacegame.levels
 			/*
 			* Animation and Collisions : Asteroids
 			*/
-			for (var n:int = 0; n < _asteroids.length; n++) {
+			for (var n:int = _asteroids.length - 1; n >= 0; n--) {
 				var theAsteroid:Asteroid = _asteroids[n];
 				theAsteroid.animate();
+				
+				if (theAsteroid.x <= 0 - theAsteroid.width) {
+					removeChild(theAsteroid);
+					_asteroids.splice(n, 1);
+					continue;
+				}
 				
 				if (this.contains(theAsteroid)) {
 					var theAsteroidRect:Rectangle = theAsteroid.getBounds(this.parent);
 					
 					if (_playerShipRect.intersects(theAsteroidRect)) {
-						//trace('player ship hits asteroid');
 						if (!_shipIsProtected) _life.decreaseLife(theAsteroid.damage);
 						removeProtectingLifeforce();
 						
@@ -303,15 +301,20 @@ package com.jonathantorres.anotherspacegame.levels
 			/*
 			* Animation and Collisions : Healthbars
 			*/
-			for (var m:int = 0; m < _healthbars.length; m++) {
+			for (var m:int = _healthbars.length - 1; m >= 0; m--) {
 				var healthbar:Health = _healthbars[m];
 				healthbar.animate();
+				
+				if (healthbar.x <= 0 - healthbar.width) {
+					removeChild(healthbar);
+					_healthbars.splice(m, 1);
+					continue;
+				}
 				
 				if (this.contains(healthbar)) {
 					var healthbarRect:Rectangle = healthbar.getBounds(this.parent);
 					
 					if (_playerShipRect.intersects(healthbarRect)) {
-						//trace('player takes health bar');
 						_life.increaseLife(healthbar.lifeIncrease);
 						
 						removeChild(healthbar);
@@ -324,15 +327,20 @@ package com.jonathantorres.anotherspacegame.levels
 			/*
 			* Animation and Collisions : Lifeforces
 			*/
-			for (var p:int = 0; p < _lifeforces.length; p++) {
+			for (var p:int = _lifeforces.length - 1; p >= 0; p--) {
 				var lifeforce:Lifeforce = _lifeforces[p];
 				lifeforce.animate();
+				
+				if (lifeforce.x <= 0 - lifeforce.width) {
+					removeChild(lifeforce);
+					_lifeforces.splice(p, 1);
+					continue;
+				}
 				
 				if (this.contains(lifeforce)) {
 					var lifeforceRect:Rectangle = lifeforce.getBounds(this.parent);
 					
 					if (_playerShipRect.intersects(lifeforceRect)) {
-						//trace('player protects ship');
 						addProtectingLifeforce();
 						
 						removeChild(lifeforce);
@@ -347,7 +355,6 @@ package com.jonathantorres.anotherspacegame.levels
 		{
 			if (_allAsteroidsDeployed && _allEnemyShipsDeployed) {
 				if (_asteroids.length == 0 && _enemyShips.length == 0) {
-					//trace('game over: next level : player wins');
 					cleanUp();
 				}
 			}
@@ -357,7 +364,6 @@ package com.jonathantorres.anotherspacegame.levels
 		{
 			if (_time != null) {
 				if (_time.gameTime.text == '2:00') {
-					//trace('Game Over! - Time is up');
 					cleanUp();
 				}
 			}
@@ -372,7 +378,6 @@ package com.jonathantorres.anotherspacegame.levels
 				var totalLife:Number = _life.totalLife;
 				
 				if (totalLife <= 0) {
-					//trace('Game Over! You\'re dead');
 					cleanUp();
 				}
 			}
@@ -380,6 +385,7 @@ package com.jonathantorres.anotherspacegame.levels
 		
 		protected function gameOver():void
 		{
+			trace('parent: ' + this.parent, 'this: ' + this);
 			var parent:Sprite = Sprite(parent);
 			parent.removeChild(this);
 			parent.addChild(new GameOverMenu(_gameScore));
@@ -388,7 +394,7 @@ package com.jonathantorres.anotherspacegame.levels
 		
 		protected function cleanUp():void
 		{
-			trace('Player Lasers: ' + _playerLasers.length);
+			trace('Player Lasers: ' + _playerShip.lasers.length);
 			trace('Enemy Ships: ' + _enemyShips.length);
 			trace('Asteroids: ' + _asteroids.length);
 			trace('Healthbars: ' + _healthbars.length);
@@ -414,7 +420,6 @@ package com.jonathantorres.anotherspacegame.levels
 						_enemyShips.splice(j, 1);
 					}
 					
-					
 					for (var k:int = 0; k < enemyLasers.length; k++) {
 						var laser:Laser = Laser(enemyLasers[k]);
 						if (laser != null) {
@@ -424,7 +429,6 @@ package com.jonathantorres.anotherspacegame.levels
 					}
 				}
 			}
-			
 			
 			if (_asteroids.length != 0) {
 				for (var l:int = 0; l < _asteroids.length; l++) {
