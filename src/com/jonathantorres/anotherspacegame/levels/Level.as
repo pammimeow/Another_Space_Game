@@ -174,6 +174,12 @@ package com.jonathantorres.anotherspacegame.levels
 				
 				playerLaser.animate('right');
 				
+				if (playerLaser.x >= stage.stageWidth) {
+					removeChild(playerLaser);
+					_playerShip.lasers.splice(k, 1);
+					continue;
+				}
+				
 				for (var l:int = _enemyShips.length - 1; l >= 0; l--) {
 					var enemyShip:EnemyShip = _enemyShips[l];
 					
