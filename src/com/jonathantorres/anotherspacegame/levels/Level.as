@@ -221,7 +221,7 @@ package com.jonathantorres.anotherspacegame.levels
 				var enemyLasers:Array = enemy.lasers;
 				enemy.animate();
 				
-				if (enemy.x <= 0 - enemy.width) {
+				if (enemy.x + enemy.width <= 0) {
 					removeChild(enemy);
 					_enemyShips.splice(i, 1);
 					continue;
@@ -278,7 +278,7 @@ package com.jonathantorres.anotherspacegame.levels
 				var theAsteroid:Asteroid = _asteroids[n];
 				theAsteroid.animate();
 				
-				if (theAsteroid.x <= 0 - theAsteroid.width) {
+				if (theAsteroid.x + theAsteroid.width <= 0) {
 					removeChild(theAsteroid);
 					_asteroids.splice(n, 1);
 					continue;
@@ -305,7 +305,7 @@ package com.jonathantorres.anotherspacegame.levels
 				var healthbar:Health = _healthbars[m];
 				healthbar.animate();
 				
-				if (healthbar.x <= 0 - healthbar.width) {
+				if (healthbar.x + healthbar.width <= 0) {
 					removeChild(healthbar);
 					_healthbars.splice(m, 1);
 					continue;
@@ -331,7 +331,7 @@ package com.jonathantorres.anotherspacegame.levels
 				var lifeforce:Lifeforce = _lifeforces[p];
 				lifeforce.animate();
 				
-				if (lifeforce.x <= 0 - lifeforce.width) {
+				if (lifeforce.x + lifeforce.width <= 0) {
 					removeChild(lifeforce);
 					_lifeforces.splice(p, 1);
 					continue;
