@@ -174,10 +174,12 @@ package com.jonathantorres.anotherspacegame.levels
 				
 				playerLaser.animate('right');
 				
-				if (playerLaser.x >= stage.stageWidth) {
-					removeChild(playerLaser);
-					_playerShip.lasers.splice(k, 1);
-					continue;
+				if (stage != null) {
+					if (playerLaser.x >= stage.stageWidth) {
+						removeChild(playerLaser);
+						_playerShip.lasers.splice(k, 1);
+						continue;
+					}
 				}
 				
 				for (var l:int = _enemyShips.length - 1; l >= 0; l--) {
@@ -190,11 +192,11 @@ package com.jonathantorres.anotherspacegame.levels
 							_gameScore += enemyShip.scoreValue;
 							_score.updateScore(_gameScore);
 							
-							removeChild(enemyShip);
-							_enemyShips.splice(l, 1);
-							
 							removeChild(playerLaser);
 							_playerShip.lasers.splice(k, 1);
+							
+							removeChild(enemyShip);
+							_enemyShips.splice(l, 1);
 						}
 					}
 				}
