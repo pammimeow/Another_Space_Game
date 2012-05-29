@@ -169,7 +169,7 @@ package com.jonathantorres.anotherspacegame.levels
 			 * Animation and Collisions : Player ship and his lasers
 			 */
 			for (var k:int = _playerLasers.length - 1; k >= 0; k--) {
-				var playerLaser:Laser = Laser(_playerLasers[k]);
+				var playerLaser:Laser = Laser(_playerShip.lasers[k]);
 				var playerLaserRect:Rectangle = playerLaser.getBounds(this.parent);
 				
 				playerLaser.animate('right');
@@ -197,6 +197,7 @@ package com.jonathantorres.anotherspacegame.levels
 							
 							removeChild(enemyShip);
 							_enemyShips.splice(l, 1);
+							continue;
 						}
 					}
 				}
@@ -216,6 +217,7 @@ package com.jonathantorres.anotherspacegame.levels
 							
 							removeChild(playerLaser);
 							_playerShip.lasers.splice(k, 1);
+							continue;
 						}
 					}
 				}

@@ -57,7 +57,7 @@ package com.jonathantorres.anotherspacegame.objects
 			_ship.y = -(_ship.height * 0.5);
 			addChild(_ship);
 			
-			_shootTimer = new Timer(2000);
+			_shootTimer = new Timer((Math.random() * 2000) + 1000);
 			_shootTimer.addEventListener(TimerEvent.TIMER, onShootTimer);
 			_shootTimer.start();
 		}
