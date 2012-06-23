@@ -1,15 +1,14 @@
 package com.jonathantorres.anotherspacegame.menu
 {
-	import com.jonathantorres.anotherspacegame.Assets;
-	import com.jonathantorres.anotherspacegame.Game;
-	import com.jonathantorres.anotherspacegame.levels.Level;
-	
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
-	import starling.events.TouchPhase;
 	import starling.text.TextField;
+
+	import com.jonathantorres.anotherspacegame.Assets;
+	import com.jonathantorres.anotherspacegame.Game;
+	import com.jonathantorres.anotherspacegame.levels.Level;
 	
 	/**
 	 * @author Jonathan Torres

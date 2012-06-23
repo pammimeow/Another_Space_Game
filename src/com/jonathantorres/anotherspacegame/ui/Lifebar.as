@@ -1,15 +1,14 @@
 package com.jonathantorres.anotherspacegame.ui
 {
-	import com.jonathantorres.anotherspacegame.Assets;
-	
-	import flash.display.BitmapData;
-	import flash.display.Sprite;
-	
-	import starling.display.Image;
 	import starling.display.Sprite;
+	import starling.display.Image;
 	import starling.events.Event;
 	import starling.text.TextField;
 	import starling.textures.Texture;
+
+	import com.jonathantorres.anotherspacegame.Assets;
+
+	import flash.display.BitmapData;
 	
 	/**
 	 * @author Jonathan Torres

@@ -1,17 +1,17 @@
 package com.jonathantorres.anotherspacegame.menu
 {
-	import com.jonathantorres.anotherspacegame.Assets;
-	import com.jonathantorres.anotherspacegame.Game;
-	import com.jonathantorres.anotherspacegame.utils.SoundManager;
-	
-	import flash.media.Sound;
-	import flash.media.SoundChannel;
-	
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.text.TextField;
+
+	import com.jonathantorres.anotherspacegame.Assets;
+	import com.jonathantorres.anotherspacegame.Game;
+	import com.jonathantorres.anotherspacegame.utils.SoundManager;
+
+	import flash.media.Sound;
+	import flash.media.SoundChannel;
 	
 	/**
 	 * @author Jonathan Torres
@@ -108,7 +108,6 @@ package com.jonathantorres.anotherspacegame.menu
 		{
 			var touch:Touch = event.getTouch(stage);
 			var target:TextField = TextField(event.currentTarget);
-			var parentSprite:Sprite = Sprite(this.parent);
 			
 			//click
 			if (touch.phase == 'ended') {
@@ -130,7 +129,6 @@ package com.jonathantorres.anotherspacegame.menu
 		{
 			var touch:Touch = event.getTouch(stage);
 			var target:TextField = TextField(event.currentTarget);
-			var parentSprite:Sprite = Sprite(this.parent);
 			
 			//click
 			if (touch.phase == 'ended') {

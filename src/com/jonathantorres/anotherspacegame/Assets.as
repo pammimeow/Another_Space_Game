@@ -93,7 +93,6 @@ package com.jonathantorres.anotherspacegame
 		private static var _textureAssets:Dictionary = new Dictionary();
 		private static var _xmlAssets:Dictionary = new Dictionary();
 		private static var _soundAssets:Dictionary = new Dictionary();
-		private static var _fontAssets:Dictionary = new Dictionary();
 		
 		public function Assets() { }
 		

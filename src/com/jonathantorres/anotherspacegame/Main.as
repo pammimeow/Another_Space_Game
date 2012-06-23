@@ -1,14 +1,13 @@
 package com.jonathantorres.anotherspacegame
 {
+	import starling.core.Starling;
+
 	import com.jonathantorres.anotherspacegame.utils.Stats;
-	
+
 	import flash.display.Sprite;
-	import flash.display.Stage;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
-	
-	import starling.core.Starling;
 	
 	/**
 	 * @author Jonathan Torres

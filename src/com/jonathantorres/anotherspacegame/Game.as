@@ -1,27 +1,22 @@
 package com.jonathantorres.anotherspacegame
 {
-	import com.jonathantorres.anotherspacegame.levels.Level;
-	import com.jonathantorres.anotherspacegame.menu.MainMenu;
-	
-	import flash.media.Sound;
-	import flash.media.SoundChannel;
-	
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import starling.extensions.ParticleDesignerPS;
 	import starling.text.TextField;
+
+	import com.jonathantorres.anotherspacegame.menu.MainMenu;
+
+	import flash.media.Sound;
+	import flash.media.SoundChannel;
 	
 	/**
 	 * @author Jonathan Torres
 	 */
 	public class Game extends Sprite
 	{
-		private var _playerShipFire:ParticleDesignerPS;
-		private var _playerShip:Image;
 		private var _mainMenu:MainMenu;
 		private var _background:Image;
-		private var _level1:Level;
 		
 		private var _mainTitle:TextField;
 		private var _bgAudio:Sound;
